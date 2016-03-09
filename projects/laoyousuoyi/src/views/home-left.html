@@ -1,0 +1,21 @@
+<div class="home-left">
+	<div class="home-notice" ng-controller = 'homeNoticeCtrl'>
+		<h2>通知公告</h2>
+		<ul ng-repeat = 'item in news'>
+			<li><a href="#">{{item.title}}</a></li>
+		</ul>
+	</div>
+	<div class="home-news" ng-controller = 'homeNewsCtrl'>
+		<h2>新闻快讯</h2>
+		<ul ng-repeat = 'item in news'>
+			<li><a href="#">{{item.title}}</a></li>
+		</ul>
+	</div>
+	<div class="home-trends" ng-controller = 'homeTrendsCtrl'>
+		<h2>学院动态</h2>
+		<ul ng-repeat = 'item in news'>
+			<li><a href="#">{{item.title}}</a></li>
+		</ul>
+	</div>
+
+</div>

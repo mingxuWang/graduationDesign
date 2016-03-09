@@ -1,0 +1,5 @@
+<div class="list-left clearfix" ng-controller = 'listLeftCtrl'>
+	<ul ng-repeat = 'item in menu'>
+		<li><a href={{'#/list?menu='+item.menu+'&list='+item.list}}>{{item.item}}</a></li>
+	</ul>
+</div>

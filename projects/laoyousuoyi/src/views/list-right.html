@@ -1,0 +1,8 @@
+<div class="list-right" ng-controller = 'listRightCtrl'>
+	<div class="list-content">
+		<div class="list-title">{{listTitle}}</div>
+		<ul ng-repeat = 'item in lists'>
+			<li><a href={{'#/details?menu='+item.menu+'&list='+item.list+'&id='+item.id}}>{{item.item}}</a></li>
+		</ul>
+	</div>
+</div>
