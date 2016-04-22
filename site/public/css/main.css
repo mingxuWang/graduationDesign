@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html.adaptToPC {
+  width: 540px;
+  overflow-x: hidden;
+  margin: 0 auto;
+  height: auto;
+}
+html.adaptToPC .header {
+  width: 540px;
+}

@@ -1,0 +1,24 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@color    		: 	#000000;
+@font-family  : 	"Helvetica", "Microsoft YaHei", "微软雅黑";
+@pcWidth      :   540px;
+
+@radix: 100;
+.px2rem(@name, @px) {
+    @{name}: @px / @radix * 1rem;
+}
+
+// pc 适配
+html.adaptToPC {
+	width: @pcWidth;
+	overflow-x: hidden;
+	margin: 0 auto;
+	height: auto;
+	.header {
+		width: @pcWidth;
+	}
+}
