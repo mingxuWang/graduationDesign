@@ -1,32 +1,29 @@
 define(function(){
-    var tpls = {
+    var tpls = {	
         'skeleton': [
             '<div class="main">',
                 '<header class="header">',
                 '</header>',
-                '<div class="banner">',
+                '<div class="content">',
                 '</div>',
-                '<ul class="list">',
-                '</ul>',
             '</div>'
         ].join(''),
         'header': [
+        		'<span class="act-back">⬅︎</span>',
                 '<h1>{{title}}</h1>'
         ].join(''),
-        'banner': [
-            '<img src="{{img.src}}" alt="{{img.alt}}" data-id="{{img.id}}" />'
-        ].join(''),
-        'list': [
-            '{{each list as item index}}',
-            '<li class="list-item" data-id="{{item.id}}">',
-                '<img class="list-img" src="{{item.src}}" alt="{{item.alt}}" />',
-                '<div class="list-content">',
-                    '<span class="list-title">{{item.title}}</span>',
-                    '<span class="list-date">{{item.date}}</span>',
-                '</div>',
-                '<div class="list-summary">{{item.summary}}</div>',
-            '</li>',
-            '{{/each}}'
+        'content': [
+        	'<div class="title">{{item.title}}</div>',
+        	'<div class="summary">',
+        		'<span class="key author">{{item.author}}</span>',
+        		'<span class="key date">{{item.date}}</span>',
+        	'</div>',
+        	'<div class="artical">',
+        	'{{each item.para as para index}}',
+        	'<p class="paragraph">{{para}}</p>',
+        	'{{/each}}',
+        	'</div>'
+        	
         ].join('')
     };
     return tpls;

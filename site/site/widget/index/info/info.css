@@ -1,1 +1,48 @@
-info.css
+.index-info .act-back {
+  position: fixed;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-left: 0.3rem;
+  color: white;
+}
+.index-info .content {
+  margin-top: 1.6rem;
+}
+.index-info .content .title {
+  margin: 0 auto;
+  width: 10rem;
+  font-size: 0.8rem;
+  text-align: center;
+  background-color: white;
+}
+.index-info .content .summary {
+  margin: 0 auto;
+  width: 10rem;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  margin-bottom: 0.4rem;
+  text-align: center;
+  font-weight: bold;
+  background-color: white;
+}
+.index-info .content .summary .key {
+  font-size: 0.4rem;
+  line-height: 0.8rem;
+  display: inline-block;
+  vertical-align: middle;
+  padding-bottom: 0.3rem;
+}
+.index-info .content .summary .date {
+  padding-left: 0.3rem;
+}
+.index-info .content .artical {
+  background-color: white;
+}
+.index-info .content .artical .paragraph {
+  margin: 0 auto;
+  width: 10rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.6rem;
+  text-indent: 1.2rem;
+}

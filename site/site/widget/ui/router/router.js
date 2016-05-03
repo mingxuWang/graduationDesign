@@ -30,7 +30,7 @@ define(['backbone','ui/nav/nav'],function(Backbone,mainNav){
 			}
 			var defaultOptions = {
 				hideMenu: false,
-				nav: 'baoliao'
+				nav: 'index'
 			};
 			options = $.extend(defaultOptions, options);
 			this.hideMenu = options.hideMenu;
@@ -52,15 +52,15 @@ define(['backbone','ui/nav/nav'],function(Backbone,mainNav){
 				that.currentView = new view();
 			});
 		},
-		actInfo: function(){
+		actInfo: function(queryString){
 			var that = this;
 			require(['index/info/info'],function(view){
 				that.clean({
-					hideMenu: false,
+					hideMenu: true,
 					nav: 'index'
 				});
-				that.currentView = new view();
-			})
+				that.currentView = new view(queryString);
+			});
 		},
 		actSearch: function(){
 			var that =this;

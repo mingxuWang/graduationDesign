@@ -1,51 +1,9 @@
 define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) {
     var $canvas = $(document.body).find('#canvas');
 
-    var testArr = [{
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
-    }]
+    
     var index_model = Backbone.Model.extend({
-        //url:'',
+        url:'/list',
         defaults: function() {
             return {
                 header: null,
@@ -55,6 +13,31 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
         },
         getList: function() {
             var that = this;
+            that.fetch({
+                dataType: "json",
+                // data: keys,
+                timeout: 20000,
+                cache: false,
+                success: function (_, response) {
+                    if (response) {
+                        //TODO 单线请求,可以这样;但是多线请求,可能就会出问题了
+                        that.set({list: response});
+                    } else {
+                        Alert.show(response.msg);
+                    }
+                    Loading.hide();
+                    that._loadingNode = false;
+                },
+                error: function (_, errorMsg) {
+                    Loading.hide();
+                    that._loadingNode = false;
+                    if (errorMsg === "timeout") {
+                        Alert.show("网络请求超时!");
+                    } else {
+                        Alert.show("您的网络似乎有问题, 请检查网络后重试!");
+                    }
+                }
+            });
 
         }
     });
@@ -70,8 +53,7 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
             this.model = new index_model();
             this.renderSkeleton();
             this.renderHeader();
-            this.renderList();
-            this.listenTo(this.model, 'change:baoliao_list', this.renderList);
+            this.listenTo(this.model, 'change:list', this.renderList);
             this.model.getList();
         },
         renderSkeleton: function() {
@@ -86,10 +68,13 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
 
         },
         renderList: function() {
-            this.$el.find('.main .list').append(T.compile(tpls.list)({ list: testArr }));
+            var that = this;
+            var list = that.model.get('list');
+            this.$el.find('.main .list').append(T.compile(tpls.list)({ list: list }));
         },
         actInfo: function(e) {
             var id = $(e.currentTarget).data("id");
+            Backbone.history.navigate('index/info?id='+id,{trigger: true, replace: false});
 
         }
     });
