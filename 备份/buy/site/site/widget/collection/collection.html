@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalabel=no">
+    <title>我的收藏</title>
+    <script type="text/javascript" src="../ui/template/template.js"></script>
+    <script type="text/javascript" src="../ui/jquery/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="../ui/nav/nav.js?v1.2"></script>
+    <link rel="stylesheet" type="text/css" href="/schoolBuy/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="collection.css">
+    <script type="text/javascript" src="collection.js"></script>
+
+</head>
+<body>
+<div class="header">
+    <a class="act-back">返回</a>
+    <p>我的收藏</p>
+</div>
+
+<script type="text/html" id="collection-tpl">
+    {{if baoliao.length>0}}
+<ul class="main-body">
+    {{each baoliao as item}}
+    <li class="main-cell" data-baoliao-id="{{item.baoliao_id}}">
+        <div class="pic">
+            <img src="{{item.img}}">
+        </div>
+        <div class="content">
+            <div class="title">
+                <p>
+                    {{item.title}}
+                </p>
+            </div>
+            <div class="footer">
+               <span>{{item.source_name}}
+               </span>
+               <span>
+                  {{item.score}}
+               </span>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</ul>
+    {{/if}}
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+.mod-collection .header{
+    position: relative;
+    height: 2.5rem;
+    background-color: #fff;
+    border-bottom: 1px solid #dfdfdf;
+}
+.mod-collection .header a {
+    color: #ff7878;
+    position: absolute;
+    left: 1rem;
+    line-height: 2.5rem;
+    font-size: .8rem;
+}
+.mod-collection .header p{
+    text-align: center;
+    line-height: 2.5rem;
+}
+.mod-collection .header p {
+    text-align: center;
+}
+.mod-collection .main-body {
+    background-color: #fff;
+}
+
+.mod-collection .main-cell {
+    margin: 0 .8rem;
+    border-bottom: 1px solid #ececec;
+}
+.mod-collection .main-cell .pic {
+    width: 5rem;
+    margin-right: .5rem;
+    margin-left: .5rem;
+}

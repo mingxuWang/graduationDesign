@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalabel=no">
+	<title>我的</title>
+	<script type="text/javascript" src="../ui/template/template.js"></script>
+	<script type="text/javascript" src="../ui/zepto/zepto.min.js"></script>
+    <script type="text/javascript" src="../ui/nav/nav.js?v1.2"></script>
+    <script type="text/javascript" src="my.js?v1.2"></script>
+    <link rel="stylesheet" type="text/css" href="/schoolBuy/static/css/style.css">
+	<link rel="stylesheet" type="text/css" href="my.css">
+</head>
+<body>
+   <div class="header">
+   	  <div class="title">
+      </div>
+
+      <div class="body">
+          <script type="text/html" id="my-tpl">
+        <div class="pic">
+          <img src="{{item.user_img}}">
+        </div>
+        <div class="content">
+
+                {{if item.user_name}}
+                    <p class="name">Hi {{item.user_name}}</p>
+                {{else}}
+                    <p class="name">Hi 你好</p>
+                    <button class="btn act-login-btn" id="act-login">登录</button>
+                {{/if}}
+
+        </div>
+          </script>
+      </div>
+
+   </div>
+   <div class="my-options">
+     <ul>
+       <li class="act-comment">
+         <div class="logo">
+           <img src="/schoolBuy/static/imgs/comment.png">
+         </div>
+         <p>评论</p>
+       </li>
+       <li class="act-collect">
+         <div class="logo">
+           <img src="/schoolBuy/static/imgs/star.png">
+         </div>
+         <p>收藏</p>
+       </li>
+       <li class="act-comeout">
+         <div class="logo">
+           <img src="/schoolBuy/static/imgs/star.png">
+         </div>
+         <p>爆料</p>
+       </li>
+     </ul>
+   </div>
+   <div class="logout">
+       <script type="text/html" id="logout-tpl">
+           {{if item.user_name}}
+           <button class="btn act-logout" id="act-logout">退出登录</button>
+           {{/if}}
+       </script>
+   </div>
+</body>
+</html>

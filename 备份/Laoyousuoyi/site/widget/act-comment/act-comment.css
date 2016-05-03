@@ -1,0 +1,105 @@
+.mod-act-comment .header{
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    height: 2.5rem;
+    background-color: #fff;
+    border-bottom: 1px solid #dfdfdf;
+}
+.mod-act-comment .header a {
+    color: #ff7878;
+    position: absolute;
+    left: 1rem;
+    line-height: 2.5rem;
+    font-size: .8rem;
+}
+.mod-act-comment .header p{
+    text-align: center;
+    line-height: 2.5rem;
+}
+.mod-act-comment .header p{
+    text-align: center;
+}
+.mod-act-comment .comment-list {
+    padding-top: 2.8rem;
+    margin-bottom: 3.5rem;
+}
+
+.mod-act-comment .comment-list ul li{
+    display: flex;
+    background-color: #fff;
+
+    margin-bottom: .5rem;
+    padding: .8rem;
+    border-bottom: 1px solid #dfdfdf;
+}
+.mod-act-comment .comment-list ul li .pic{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: .8rem;
+}
+.mod-act-comment .comment-list ul li .pic img{
+    height: 100%;
+}
+.mod-act-comment .comment-list ul li .content{
+    flex:1;
+    position: relative;
+}
+.mod-act-comment .comment-list ul li .content .title{
+    position: relative;
+    overflow: hidden;
+    color: #bcbcbc;
+    margin-bottom: .5rem;
+}
+.mod-act-comment .comment-list ul li .content .title p{
+    float: left;
+    font-size: .8rem;
+}
+.mod-act-comment .comment-list ul li .content .title .time{
+    position: absolute;
+    right: 0;
+    font-size: .7rem;
+}
+.mod-act-comment .comment-list ul li .content .comment-content{
+    margin-bottom: .5rem;
+    color: #515151;
+    margin-left: .2rem;
+}
+.mod-act-comment .comment-list ul li .content .comment-from{
+    border: 1px solid #dfdfdf;
+    width: 2.4rem;
+    background-color: #faffda;
+    font-size: .7rem;
+    color: #515151;
+    padding:.3rem .3rem;
+    margin-left: .2rem;
+    position: absolute;
+    right: 0;
+    bottom: 0rem;
+}
+.mod-act-comment .footer {
+    position: fixed;
+    bottom: 0;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    border-top: 1px solid #E8E8E8;
+    width: 100%;
+    background-color: #fff;
+}
+.mod-act-comment .footer input {
+    width: 80%;
+    margin-left: .5rem;
+}
+.mod-act-comment .footer .act-comment {
+    position: absolute;
+    right: 1rem;
+    padding: .3rem;
+    border-radius: .3rem;
+    border: none;
+    background: #ff7878;
+    color: #ffffff;
+    top: .45rem;
+    outline: none;
+}

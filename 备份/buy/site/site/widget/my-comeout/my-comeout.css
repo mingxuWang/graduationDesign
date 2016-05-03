@@ -1,0 +1,33 @@
+.mod-my-comeout .header{
+    position: relative;
+    height: 2.5rem;
+    background-color: #fff;
+    border-bottom: 1px solid #dfdfdf;
+}
+.mod-my-comeout .header a {
+    color: #ff7878;
+    position: absolute;
+    left: 1rem;
+    line-height: 2.5rem;
+    font-size: .8rem;
+}
+.mod-my-comeout .header p{
+    text-align: center;
+    line-height: 2.5rem;
+}
+.mod-my-comeout .header p {
+    text-align: center;
+}
+.mod-my-comeout .main-body {
+    background-color: #fff;
+}
+
+.mod-my-comeout .main-cell {
+    margin: 0 .8rem;
+    border-bottom: 1px solid #ececec;
+}
+.mod-my-comeout .main-cell .pic {
+    width: 5rem;
+    margin-right: .5rem;
+    margin-left: .5rem;
+}

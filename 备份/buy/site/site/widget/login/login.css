@@ -1,0 +1,53 @@
+body {
+    background-color: #ffffff;
+}
+.header{
+    position: relative;
+    height: 2.5rem;
+    background-color: #fff;
+    border-bottom: 1px solid #E6E6E6;
+}
+.header a {
+    color: #ff7878;
+    position: absolute;
+    left: 1rem;
+    line-height: 2.5rem;
+    font-size: .8rem;
+}
+.header p {
+    text-align: center;
+    line-height: 2.5rem;
+}
+.login-body {
+    padding:3rem 2.5rem;
+}
+.login-body > * {
+    display: flex;
+    height: 2rem;
+    border-bottom: 1px solid #E6E6E6;
+    align-items: flex-start;
+    margin-top: .5rem;
+}
+.login-body .password input{
+    width: 70%;
+    border-right: 1px solid #E6E6E6;
+}
+.login-body .password span {
+    font-size: .5rem;
+    line-height: 1.5rem;
+    color: #bcbcbc;
+    margin-left: .5rem;
+}
+.login-footer {
+    text-align: center;
+}
+.login-footer .login-btn-box {
+    text-align: center;
+}
+.login-footer a {
+    font-size: .5rem;
+    margin-top: 1.5rem;
+    display: inline-block;
+    color: #0F94EA;
+    text-decoration: underline;
+}

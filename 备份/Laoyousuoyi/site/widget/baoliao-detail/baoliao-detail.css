@@ -1,0 +1,123 @@
+.mod-baoliao-detail .header{
+    position: fixed;
+    height: 2.5rem;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #dfdfdf;
+}
+.mod-baoliao-detail .header a {
+    color: #ff7878;
+    position: absolute;
+    left: 1rem;
+    line-height: 2.5rem;
+    font-size: .8rem;
+}
+.mod-baoliao-detail .header p{
+    text-align: center;
+    line-height: 2.5rem;
+}
+.mod-baoliao-detail .header p {
+    text-align: center;
+}
+.mod-baoliao-detail .good-detail{
+    padding:3rem 1rem;
+}
+.mod-baoliao-detail .good-detail .detail-top{
+
+}
+.mod-baoliao-detail .good-detail .detail-top .pic {
+    height: 11rem;
+    text-align: center;
+}
+.mod-baoliao-detail .good-detail .detail-top .pic img{
+    height: 100%;
+}
+.mod-baoliao-detail .good-detail .detail-top .title .tag{
+    font-size: .5rem;
+    color: #bcbcbc;
+    padding-top: .3rem;
+}
+.mod-baoliao-detail .good-detail .detail-top .title h2 {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    padding: .5rem 0;
+}
+.good-detail .detail-top .title .price {
+    color: #ff7878;
+    font-size: 1.2rem;
+}
+.mod-baoliao-detail .good-detail .detail-body {
+    margin-top: 1rem;
+}
+.mod-baoliao-detail .good-detail .detail-body .section {
+    margin-top: 1rem;
+    font-size: .8rem;
+    line-height: 2;
+}
+
+.mod-baoliao-detail .good-detail .detail-body .section .title {
+    font-size: 1rem;
+    color: #515151;
+    line-height: 2;
+    font-weight: bold;
+}
+.mod-baoliao-detail .good-detail .detail-body .section .title-detail {
+    font-size: .9rem;
+    padding-top: .5rem;
+}
+.mod-baoliao-detail .good-detail .detail-body .section .detail {
+    margin-top: 1rem;
+    font-size: .8rem;
+    line-height: 2;
+}
+.mod-baoliao-detail .good-detail .detail-body .detail .title-detail{
+    display: flex;
+    align-items: center;
+}
+.mod-baoliao-detail .good-detail .detail-body .detail .title-detail .title {
+    font-size: .9rem;
+    line-height: 1.5;
+}
+.mod-baoliao-detail .good-detail .detail-body .detail .title-detail .title p {
+    font-weight: normal;
+    font-size: .8rem;
+}
+.mod-baoliao-detail .good-detail .detail-body .detail .title-detail .pic{
+    width: 40%;
+    padding: 0 1rem;
+}
+.mod-baoliao-detail .good-detail .detail-body .detail .title-detail .pic img {
+    width: 100%;
+}
+.mod-baoliao-detail .footer {
+    position: fixed;
+    bottom: 0;
+    height: 2.5rem;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid #dfdfdf;
+    display: flex;
+}
+.mod-baoliao-detail .footer .left {
+    flex: 1.8;
+}
+.mod-baoliao-detail .footer .right {
+    flex: 1;
+    background-color: #ff7878;
+    text-align: center;
+}
+.mod-baoliao-detail .footer .right a {
+    font-size: 1rem;
+    color: #ffffff;
+    line-height: 2.5rem;
+
+}
+.mod-baoliao-detail .footer .left ul {
+    overflow: hidden;
+
+}
+.mod-baoliao-detail .footer .left ul li {
+    width: 33.333%;
+    float: left;
+    line-height: 2.5rem;
+}

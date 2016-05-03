@@ -1,0 +1,74 @@
+ul{
+	overflow: hidden;
+}
+.mod-my .header{
+	
+}
+.mod-my .header .title{
+	height: 4.5rem;
+	background-color: #ff7878;
+}
+.mod-my .header .body {
+	position: relative;
+	height: 8rem;
+	text-align: center;
+	padding-top: 2rem;
+}
+.mod-my .header .body .pic {
+	position: absolute;
+	width: 4rem;
+	height: 4rem;
+	border-radius: 100%;
+	top: -2rem;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.mod-my .header .body .pic img{
+	height: 100%;
+}
+.mod-my .header .body .content {
+	
+    
+}
+.mod-my .header .body .content .name{
+	padding: 0.3rem;
+	font-size: 0.8rem;
+}
+.mod-my .header .body .content .act-login-btn {
+	padding: .5rem 2rem;
+	font-size: .8rem;
+	display: inline-block;
+	margin-top: 1.3rem;
+}
+.mod-my .my-options ul li{
+	width: 33.333%;
+	border:1px solid #dfdfdf;
+	border-right: none;
+	float: left;
+	padding: 1.2rem;
+	text-align: center;
+	background-color: #fff;
+}
+.mod-my .my-options ul li .logo{
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 100%;
+	border: 1px solid #ff7878;
+	text-align: center;
+	margin: 0 auto;
+	line-height: 2.7rem;
+}
+.mod-my .my-options ul li .logo img {
+	width: 1.2rem;
+	height: auto;
+}
+.mod-my .my-options ul li p{
+	font-size: 0.8rem;
+	margin-top:1rem;
+}
+.mod-my .logout {
+	margin-top: 8rem;
+	text-align: center;
+}

@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+ul {
+	list-style: none;
+}
+div,li{
+	box-sizing: border-box;
+}
+a{
+	text-decoration: none;
+}
+html{
+}
+input {
+	border: none;
+	outline: medium;
+	line-height: 2;
+	background-color: transparent !important;
+}
+
+body {
+
+	background-color: #EDEDED;
+	font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif
+}
+header{
+	height:1.5rem;
+	width: 100%;
+	background-color: #01bc8f;
+	position: fixed;
+	top:0;
+	font-size: .35rem;
+	z-index: 999;
+}
+header h1 {
+	color: #fff;
+	text-align: center;
+	line-height: 1.5rem;
+}
+footer{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	background-color: #ffffff;
+	height: 1.3rem;
+	border-top:1px solid #E6E6E6;
+	padding: .1rem 0;
+	z-index: 999;
+}
+footer ul{
+
+}
+footer ul li{
+    float: left;
+    width: 25%
+
+}
+footer ul li .logo {
+	height: 0.6rem;
+	text-align: center;
+	margin-top: -0.35rem;
+	
+}
+footer ul li .logo img{
+	height: 100%;
+}
+footer ul li p {
+	margin-top: 0.45rem;
+	font-size: .3rem;
+	text-align: center;
+	color:#515151;
+}
+footer ul li.active p{
+	color:#01bc8f;
+
+}

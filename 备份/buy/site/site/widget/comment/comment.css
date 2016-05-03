@@ -1,0 +1,90 @@
+.mod-comment .header{
+	position: relative;
+	height: 2.5rem;
+	background-color: #fff;
+	border-bottom: 1px solid #dfdfdf;
+}
+.mod-comment .header a {
+	color: #ff7878;
+	position: absolute;
+	left: 1rem;
+	line-height: 2.5rem;
+	font-size: .8rem;
+}
+.mod-comment .header p{
+	text-align: center;
+	line-height: 2.5rem;
+}
+.mod-comment .header p{
+	text-align: center;
+}
+.mod-comment .comment-tab ul {
+	background-color: #fff;
+	overflow: hidden;
+	padding:0 .3rem;
+	padding-left: .8rem;
+}
+.mod-comment .comment-tab ul li{
+    float: left;
+    font-size: .8rem;
+    padding:.3rem 0;
+    margin-right: 2rem;
+}
+.mod-comment .comment-tab ul li.active{
+	border-bottom: 1px solid #ff7878;
+}
+
+.mod-comment .comment-list ul li{
+	display: flex;
+	background-color: #fff;
+
+	margin-bottom: .5rem;
+	padding: .8rem;
+	border-bottom: 1px solid #dfdfdf;
+}
+.mod-comment .comment-list ul li .pic{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: .8rem;
+}
+.mod-comment .comment-list ul li .pic img{
+	height: 100%;
+}
+.mod-comment .comment-list ul li .content{
+	flex:1;
+	position: relative;
+}
+.mod-comment .comment-list ul li .content .title{
+	position: relative;
+	overflow: hidden;
+	color: #bcbcbc;
+	margin-bottom: .5rem;
+}
+.mod-comment .comment-list ul li .content .title p{
+	float: left;
+	font-size: .8rem;
+}
+.mod-comment .comment-list ul li .content .title .time{
+	position: absolute;
+	right: 0;
+	font-size: .7rem;
+}
+.mod-comment .comment-list ul li .content .comment-content{
+	margin-bottom: .5rem;
+	color: #515151;
+	margin-left: .2rem;
+}
+.mod-comment .comment-list ul li .content .comment-from{
+	border: 1px solid #dfdfdf;
+	width: 2.4rem;
+	background-color: #faffda;
+	font-size: .7rem;
+	color: #515151;
+	padding:.3rem .3rem;
+	margin-left: .2rem;
+	position: absolute;
+	right: 0;
+	bottom: 0rem;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalabel=no">
+	<title>我的评论</title>
+	<script type="text/javascript" src="../ui/template/template.js"></script>
+	<script type="text/javascript" src="../ui/zepto/zepto.min.js"></script>
+    <script type="text/javascript" src="comment.js"></script>
+    <link rel="stylesheet" type="text/css" href="/schoolBuy/static/css/style.css">
+	<link rel="stylesheet" type="text/css" href="comment.css">
+</head>
+<body>
+   <div class="header">
+       <a class="act-back">返回</a>
+       <p>我的评论</p>
+   </div>
+   <div class='comment-tab'>
+      <ul>
+        <li class='receive active'>
+          收到的评论
+        </li>
+        <li class='post'>
+          发出的评论
+        </li>
+      </ul>  
+   </div>
+   <div class="comment-list post-comment-list">
+       <script type="text/html" id="post-comment-tpl">
+           {{if comment.length >0}}
+             <ul>
+                 {{each comment as item}}
+               <li>
+                 <div class="pic">
+                   <img src="{{item.user_img}}">
+                 </div>
+                 <div class="content">
+                   <div class="title">
+                     <p>发表评论
+                     </p>
+                     <span class="time">10分钟前</span>
+                   </div>
+                   <div class="comment-content">
+                     <p>{{item.comment_info}}</p>
+                   </div>
+                   <div class="comment-from">
+                     <span>原文</span>
+
+                   </div>
+                 </div>
+               </li>
+                 {{/each}}
+             </ul>
+           {{/if}}
+       </script>
+   </div>
+   <div class="comment-list receive-comment-list">
+       <ul>
+           <li>
+               <div class="pic">
+                   <img src="">
+               </div>
+               <div class="content">
+                   <div class="title">
+                       <p>收到评论
+                       </p>
+                       <span class="time">10分钟前</span>
+                   </div>
+                   <div class="comment-content">
+                       <p>你的点点滴滴</p>
+                   </div>
+                   <div class="comment-from">
+                       <span>原文</span>
+                   </div>
+               </div>
+           </li>
+       </ul>
+   </div>
+
+</body>
+</html>

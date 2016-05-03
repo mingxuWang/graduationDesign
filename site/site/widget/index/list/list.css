@@ -1,0 +1,45 @@
+.index-list .main {
+  margin-top: 1.7rem;
+}
+.index-list .main .banner {
+  width: 10rem;
+  height: 4rem;
+  margin: 0 auto;
+  margin-top: 0.2rem;
+  background-color: white;
+}
+.index-list .main .list li {
+  width: 10rem;
+  height: 3rem;
+  margin: 0 auto;
+  margin-top: 0.2rem;
+  font-size: 0.16rem;
+  background-color: white;
+}
+.index-list .main .list li img {
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-top: 0.2rem;
+  margin-right: 0.2rem;
+  margin-left: 0.2rem;
+  float: left;
+}
+.index-list .main .list li .list-content {
+  padding-top: 0.2rem;
+}
+.index-list .main .list li .list-content .list-title {
+  font-size: 0.5rem;
+  font-weight: bold;
+}
+.index-list .main .list li .list-content .list-date {
+  padding-left: 0.3rem;
+  font-size: 0.3rem;
+}
+.index-list .main .list li .list-summary {
+  font-size: 0.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
