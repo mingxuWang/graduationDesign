@@ -1,0 +1,10 @@
+.my .main .header {
+  background-color: white;
+}
+.my .main .header h1 {
+  color: #01bc8f;
+}
+.my .main .personal-info .top-part {
+  height: 3rem;
+  width: 10.8rem;
+}

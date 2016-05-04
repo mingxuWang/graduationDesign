@@ -93,6 +93,9 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 		pageMy: function (queryString) {
 			var that = this;
 			var querys = that.getQuerys(queryString);
+			if(helper.getItem('is_login')){
+				conf.is_login = helper.getItem('is_login');
+			}
 			if(conf.is_login){
 				require(['my/my'],function(view){
 					that.clean({

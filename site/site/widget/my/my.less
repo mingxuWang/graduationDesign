@@ -1,0 +1,20 @@
+@radix: 100;
+.px2rem(@name, @px) {
+    @{name}: @px / @radix * 1rem;
+}
+.my{
+	.main{
+		.header{
+			background-color:white;
+			h1{
+				color:#01bc8f;
+			}
+		}
+		.personal-info{
+			.top-part{
+				.px2rem(height,300);
+				.px2rem(width,1080);
+			}
+		}
+	}
+}

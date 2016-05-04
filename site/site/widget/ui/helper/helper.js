@@ -97,6 +97,19 @@ define(function(){
 		isAndroid: function () {
 			var ua = navigator.userAgent.toLowerCase();
 			return (/Android|Linux/i).test(ua);
+		},
+		canUse: function() {
+		    return typeof window.localStorage != 'undefined';
+		},
+		setItem: function(key, value) {
+		    this.canUse() && localStorage.setItem(key, JSON.stringify(value));
+		},
+		getItem: function(key) {
+		    if (this.canUse())
+		        return JSON.parse(localStorage.getItem(key));
+		},
+		removeItem: function(key) {
+		    this.canUse() && localStorage.removeItem(key);
 		}
 	};
 

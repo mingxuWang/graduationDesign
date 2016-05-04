@@ -4,14 +4,16 @@ define(function(){
             '<div class="main">',
                 '<header class="header">',
                 '</header>',
-                '<div class="banner">',
+                '<div class="personal-info">',
                 '</div>',
-                '<ul class="list">',
-                '</ul>',
             '</div>'
         ].join(''),
         header: [
                 '<h1>{{title}}</h1>'
+        ].join(''),
+        top: [
+            '<div class="top-part">',
+            '</div>'
         ].join('')
     };
     return tpls;
