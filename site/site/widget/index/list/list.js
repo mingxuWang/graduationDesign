@@ -42,7 +42,6 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
         model: null,
         className: 'index-list',
         events: {
-            'click .main-cell': 'actBaoliaoDetail',
             'click .list-item': 'actInfo'
         },
         initialize: function() {

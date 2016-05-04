@@ -68,7 +68,7 @@ define(['backbone', 'template', 'chatting/list/tpls'], function(Backbone, T, tpl
             this.$el.find('.main .list').append(T.compile(tpls.list)({ list: list }));
         },
         actRoom: function(e) {
-            if(conf.is_login == true){
+            if(conf.is_login == true || conf.is_login == 'true'){
                 var id = $(e.currentTarget).data("id");
                 Backbone.history.navigate('chatting/room?id='+id,{trigger: true, replace: false});
             }else{

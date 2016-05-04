@@ -1,1 +1,10 @@
-search.css
+.search {
+  height: 100%;
+}
+.search .main {
+  height: 100%;
+}
+.search .main #map {
+  width: 10.8rem;
+  height: 20rem;
+}
