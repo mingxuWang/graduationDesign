@@ -1,0 +1,57 @@
+@radix: 100;
+.px2rem(@name, @px) {
+    @{name}: @px / @radix * 1rem;
+}
+.chatting-list{
+	.main{
+		.header{}
+		.banner{
+			.px2rem(width,1000);
+			.px2rem(height,400);
+			margin: 0 auto;
+			.px2rem(margin-top,20);
+			background-color: white;
+		}
+		.list{
+			&:last-child{
+				margin-bottom: 1.5rem;
+			}
+			li{
+				.px2rem(width,1000);
+				.px2rem(height,300);
+				margin: 0 auto;
+				.px2rem(margin-top,20);
+				.px2rem(font-size,16);
+				background-color: white;
+				img{
+					.px2rem(width,260);
+					.px2rem(height,260);
+					.px2rem(margin-top,20);
+					.px2rem(margin-right,20);
+					.px2rem(margin-left,20);
+					float: left;
+				}
+				.list-content{
+					.px2rem(padding-top,20);
+					.list-title{
+						font-size:0.5rem;
+						font-weight: bold;
+					}
+					.list-date{
+						.px2rem(padding-left,30);
+						font-size: 0.3rem;
+					}
+				}
+				.list-summary{
+					.px2rem(font-size,40);
+					overflow : hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 3;
+					-webkit-box-orient: vertical;
+				}
+			}
+
+		}
+	}
+}

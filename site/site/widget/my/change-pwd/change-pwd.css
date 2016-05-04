@@ -1,0 +1,42 @@
+.change-pwd .main .header .act-back {
+  position: fixed;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-left: 0.3rem;
+  color: white;
+}
+.change-pwd .main .change {
+  font-size: 0.7rem;
+  margin-top: 2rem;
+}
+.change-pwd .main .change .info {
+  margin: 0 auto;
+  width: 10rem;
+}
+.change-pwd .main .change .info .item {
+  position: relative;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+.change-pwd .main .change .info .item input[type=text] {
+  position: absolute;
+  left: 5rem;
+  top: 0.2rem;
+  width: 4.8rem;
+  height: 0.7rem;
+  font-size: 0.7rem;
+}
+.change-pwd .main .change .buttons {
+  margin: 0 auto;
+  width: 10rem;
+}
+.change-pwd .main .change .buttons .ok {
+  margin: 0 auto;
+  width: 4rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  background-color: #01bc8f;
+  color: white;
+}
