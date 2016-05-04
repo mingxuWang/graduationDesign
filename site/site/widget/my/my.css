@@ -4,7 +4,46 @@
 .my .main .header h1 {
   color: #01bc8f;
 }
+.my .main .header .sign-out {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.4rem;
+  font-size: 0.4rem;
+  width: 1.8rem;
+  height: 1rem;
+  line-height: 1rem;
+  border-radius: 0.2rem;
+  text-align: center;
+  color: white;
+  background-color: #01bc8f;
+}
 .my .main .personal-info .top-part {
-  height: 3rem;
+  position: relative;
+  height: 4rem;
   width: 10.8rem;
+  background-color: #01bc8f;
+  text-align: center;
+}
+.my .main .personal-info .top-part img {
+  width: 2.5rem;
+  margin-top: 0.5rem;
+}
+.my .main .personal-info .top-part .name {
+  position: absolute;
+  bottom: 0.3rem;
+  font-size: 0.6rem;
+  color: white;
+}
+.my .main .personal-info .item-list {
+  margin: 0 auto;
+  width: 10rem;
+  font-size: 0.7rem;
+  margin-top: 0.5rem;
+}
+.my .main .personal-info .item-list li {
+  height: 1.5rem;
+  line-height: 1.5rem;
+  padding-left: 0.7rem;
+  background-color: white;
+  border-bottom: 1px solid #01bc8f;
 }

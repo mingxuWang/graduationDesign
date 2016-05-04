@@ -7,6 +7,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 			'search': 'pageSearch',
 			'chatting': 'pageChatting',
 			'my':'pageMy',
+			'my/tips': 'pageTips',
 			'register': 'pageRegister',
 			'login': 'pageLogin',
 			'*action' : 'pageIndex',
@@ -93,9 +94,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 		pageMy: function (queryString) {
 			var that = this;
 			var querys = that.getQuerys(queryString);
-			if(helper.getItem('is_login')){
-				conf.is_login = helper.getItem('is_login');
-			}
+				conf.is_login = helper.getItem('is_login') || conf.is_login;
 			if(conf.is_login){
 				require(['my/my'],function(view){
 					that.clean({
@@ -109,6 +108,17 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 				that.navigate('/login?redirectUrl='+redirectUrl,{trigger:true,replace:false});
 			}
 
+		},
+		pageTips: function(){
+			var that =this;
+			var querys = that.getQuerys(queryString);
+			require(['my/tips/tips'],function(view){
+				that.clean({
+					hideMenu: true,
+					nav: 'my'
+				});
+				that.currentView = new view({querys:querys});
+			});
 		},
 		pageLogin: function(queryString){
 			var that =this;
