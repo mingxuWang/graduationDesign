@@ -3,7 +3,7 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
 
     
     var index_model = Backbone.Model.extend({
-        url:'/list',
+        url:'/index/list',
         defaults: function() {
             return {
                 header: null,
@@ -25,12 +25,8 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
                     } else {
                         Alert.show(response.msg);
                     }
-                    Loading.hide();
-                    that._loadingNode = false;
                 },
                 error: function (_, errorMsg) {
-                    Loading.hide();
-                    that._loadingNode = false;
                     if (errorMsg === "timeout") {
                         Alert.show("网络请求超时!");
                     } else {

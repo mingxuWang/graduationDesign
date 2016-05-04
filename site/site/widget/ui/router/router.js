@@ -1,18 +1,15 @@
-define(['backbone','ui/nav/nav'],function(Backbone,mainNav){
+define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,helper){
 	var App = Backbone.Router.extend({
 		routes: {
 			//'' : 'actIndex',
-			'index': 'actIndex',
-			'index/info': 'actInfo',
-			'search': 'actSearch',
-			'baoliao-detail?baoliao_id=:id': 'actBaoliaoDetail',
-			'my-buy': 'actMyBuy',
-			'my':'actMy',
-			'collection':'actCollection',
-			'comment':'actComment',
-			'all-comment?baoliao_id=:id':'actAllcomment',
-			'comeout':'actComeout',
-			'*action' : 'actIndex',
+			'index': 'pageIndex',
+			'index/info': 'pageInfo',
+			'search': 'pageSearch',
+			'chatting': 'pageChatting',
+			'my':'pageMy',
+			'register': 'pageRegister',
+			'login': 'pageLogin',
+			'*action' : 'pageIndex',
 		},
 		currentView: null,
 		mainNav: null,
@@ -42,18 +39,27 @@ define(['backbone','ui/nav/nav'],function(Backbone,mainNav){
 				}
 			}
 		},
-		actIndex: function(){
+		getQuerys: function(queryString){
+			var querys = {};
+			if(queryString){
+				querys = helper.queryLocationSearch('?'+queryString);
+			}
+			return querys;
+		},
+		pageIndex: function(queryString){
 			var that =this;
+			var querys = that.getQuerys(queryString);
 			require(['index/list/list'],function(view){
 				that.clean({
 					hideMenu: false,
 					nav: 'index'
 				});
-				that.currentView = new view();
+				that.currentView = new view({querys:querys});
 			});
 		},
-		actInfo: function(queryString){
+		pageInfo: function(queryString){
 			var that = this;
+			var querys = that.getQuerys(queryString);
 			require(['index/info/info'],function(view){
 				that.clean({
 					hideMenu: true,
@@ -62,72 +68,67 @@ define(['backbone','ui/nav/nav'],function(Backbone,mainNav){
 				that.currentView = new view(queryString);
 			});
 		},
-		actSearch: function(){
+		pageSearch: function(queryString){
 			var that =this;
+			var querys = that.getQuerys(queryString);
 			require(['search/search'],function(view){
 				that.clean({
 					hideMenu: false,
 					nav: 'search'
 				});
-				that.currentView = new view();
+				that.currentView = new view(queryString);
 			});
 		},
-		actBaoliaoDetail: function (id) {
-			var that = this;
-			require(['baoliao-detail/baoliao-detail'],function(view){
-				that.clean({
-					hideMenu: true,
-					nav: ''
-				});
-				that.currentView = new view({id:id});
-			});
-		},
-		actMy: function () {
-			var that = this;
-			require(['my/my'],function(view){
+		pageChatting: function(queryString){
+			var that =this;
+			var querys = that.getQuerys(queryString);
+			require(['chatting/list/list'],function(view){
 				that.clean({
 					hideMenu: false,
-					nav: 'my'
+					nav: 'chatting'
 				});
-				that.currentView = new view();
+				that.currentView = new view(queryString);
 			});
 		},
-		actCollection: function () {
+		pageMy: function (queryString) {
 			var that = this;
-			require(['collection/collection'],function(view){
+			var querys = that.getQuerys(queryString);
+			if(conf.is_login){
+				require(['my/my'],function(view){
+					that.clean({
+						hideMenu: false,
+						nav: 'my'
+					});
+					that.currentView = new view(queryString);
+				});
+			}else{
+				var redirectUrl = location.href;
+				that.navigate('/login?redirectUrl='+redirectUrl,{trigger:true,replace:false});
+			}
+
+		},
+		pageLogin: function(queryString){
+			var that =this;
+			var querys = that.getQuerys(queryString);
+			require(['account/login/login'],function(view){
 				that.clean({
 					hideMenu: true,
+					nav: 'index'
 				});
-				that.currentView = new view();
+				that.currentView = new view(queryString);
 			});
 		},
-		actComment: function () {
-			var that = this;
-			require(['comment/comment'],function(view){
+		pageRegister: function(queryString){
+			var that =this;
+			var querys = that.getQuerys(queryString);
+			require(['account/register/register'],function(view){
 				that.clean({
 					hideMenu: true,
+					nav: 'index'
 				});
-				that.currentView = new view();
+				that.currentView = new view(queryString);
 			});
-		},
-		actAllcomment: function (id) {
-			var that = this;
-			require(['act-comment/act-comment'],function(view){
-				that.clean({
-					hideMenu: true,
-				});
-				that.currentView = new view({id:id});
-			});
-		},
-		actComeout: function () {
-			var that = this;
-			require(['comeout/comeout'],function(view){
-				that.clean({
-					hideMenu: true,
-				});
-				that.currentView = new view();
-			});
-		},
+		}
 
 
 	});

@@ -15,7 +15,7 @@ app.configure(function(){
 	app.use(express.errorHandler({dumpException:true,showStack:true}));
 });
 
-app.get('/list',function(req,res){
+app.get('/index/list',function(req,res){
 	var testArr = [{
 	    id: '123',
 	    title: '我是一个测试数据',
@@ -60,6 +60,21 @@ app.get('/list',function(req,res){
 	    src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
 	}]
 	res.send(testArr);
+})
+
+app.post('/account/login',function(req,res){
+	var user = req.body.username;
+	var pwd = req.body.password;
+	if(user == '111' && pwd == '222'){
+		var response = {
+			ret: 0,
+			name: 'xiaoming',
+			age: 20
+		}
+		res.send(response);
+	}else{
+		console.log('测试失败');
+	}
 })
 
 var port = 4711;

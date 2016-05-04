@@ -40,7 +40,7 @@ define(['backbone', 'template', 'search/tpls'], function(Backbone, T, tpls) {
     var index_view = Backbone.View.extend({
         tagName: 'div',
         model: null,
-        className: 'index-list',
+        className: 'chatting-list',
         events: {
             'click .main-cell': 'actBaoliaoDetail',
             'click .list-item': 'actInfo'
@@ -58,7 +58,7 @@ define(['backbone', 'template', 'search/tpls'], function(Backbone, T, tpls) {
 
         },
         renderHeader: function() {
-            this.$el.find('.main .header').html(T.compile(tpls.header)({ title: '医疗点查询' }));
+            this.$el.find('.main .header').html(T.compile(tpls.header)({ title: '老年会客室' }));
         },
         renderBanner: function() {
 

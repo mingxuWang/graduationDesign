@@ -13,7 +13,7 @@ define(function () {
                     '</div>',
                     '<p>查询医疗点</p>',
                 '</li>',
-                '<li class="nav-item nav-my-buy" data-nav = "my-buy">',
+                '<li class="nav-item nav-chatting" data-nav = "chatting">',
                     '<div class="logo">',
                         '<img src="../../../static/imgs/chatting-room.png">',
                     '</div>',

@@ -1,0 +1,44 @@
+.login .main .header .act-back {
+  position: fixed;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-left: 0.3rem;
+  color: white;
+}
+.login .main .user-info {
+  margin: 0 auto;
+  width: 10rem;
+  margin-top: 3rem;
+  font-size: 1rem;
+  text-align: center;
+}
+.login .main .user-info label {
+  line-height: 1rem;
+  height: 1rem;
+  vertical-align: middle;
+}
+.login .main .user-info input {
+  outline: none;
+  font-size: 1rem;
+  width: 5rem;
+  height: 1rem;
+  line-height: 1rem;
+  vertical-align: middle;
+}
+.login .main .user-info div {
+  height: 2rem;
+}
+.login .main .button {
+  margin: 0 auto;
+  width: 10rem;
+  text-align: center;
+  color: white;
+}
+.login .main .button .btn {
+  display: inline-block;
+  width: 3rem;
+  margin: 0.2rem;
+  background-color: #01bc8f;
+  border-radius: 0.3rem;
+}

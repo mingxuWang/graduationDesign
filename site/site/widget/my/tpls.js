@@ -1,6 +1,6 @@
 define(function(){
     var tpls = {
-        'skeleton': [
+        skeleton: [
             '<div class="main">',
                 '<header class="header">',
                 '</header>',
@@ -10,7 +10,7 @@ define(function(){
                 '</ul>',
             '</div>'
         ].join(''),
-        'header': [
+        header: [
                 '<h1>{{title}}</h1>'
         ].join('')
     };
