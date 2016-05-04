@@ -2,40 +2,6 @@ define(['backbone', 'template', 'account/login/tpls'], function(Backbone, T, tpl
 
     var $canvas = $(document.body).find('#canvas');
 
-    var Model = Backbone.Model.extend({
-    	defaults: function(){
-    		return {
-    			username: null,
-    			password: null
-    		}
-    	},
-    	checkLogin: function(username,password){
-    		var username = username;
-    		var password = password;
-    		$.ajax({
-    			url: '/account/login',
-    			dataType: "json",
-    			data: {
-    				"username":username,
-    				"password": password
-    			},
-    			type: "POST",
-    			success: function (response) {
-    			    if (response.ret === 0) {
-    			        var userInfo = response.content;
-    			        conf.userData = userInfo;
-    			        alert('success!')    //小米Note, 不知道为什么,很多情况下,从登录跳转过去,就是不能验证成功;但仅限于首页..为啥呢?
-    			    } else {
-    			        Alert.show(response.msg);
-    			    }
-    			},
-    			error: function () {
-    			    alert("登录失败!");
-    			}
-    		});
-    	}
-    });
-
     var View = Backbone.View.extend({
         tagName: 'div',
         className: 'login',
@@ -44,9 +10,11 @@ define(['backbone', 'template', 'account/login/tpls'], function(Backbone, T, tpl
         	'click .act-back': 'actBack',
         	'click .btn-login': 'actCheckLogin'
         },
-        initialize: function() {
+        initialize: function(options) {
             var that = this;
-            that.model = new Model();
+            var querys = options.querys;
+            that.redirectUrl = querys.redirectUrl;
+            that.router = that.getRouter(that.redirectUrl);
             that.render();
         },
         render: function() {
@@ -74,8 +42,37 @@ define(['backbone', 'template', 'account/login/tpls'], function(Backbone, T, tpl
         	var that = this;
         	var username = $('#username').val();
         	var password = $('#password').val();
-        	that.model.checkLogin(username,password);
-        }
+        	that.checkLogin(username,password);
+        },
+    	checkLogin: function(username,password){
+    		var that = this;
+    		var username = username;
+    		var password = password;
+    		$.ajax({
+    			url: '/account/login',
+    			dataType: "json",
+    			data: {
+    				"username":username,
+    				"password": password
+    			},
+    			type: "POST",
+    			success: function (response) {
+    			    if (response.ret === 0) {
+    			        conf.is_login = true;
+    			        Backbone.history.navigate(that.router,{trigger:true,replace:false});
+    			    } else {
+    			        Alert.show(response.msg);
+    			    }
+    			},
+    			error: function () {
+    			    alert("登录失败!");
+    			}
+    		});
+    	},
+    	getRouter: function(string){
+    		var begin = string.indexOf('#');
+    		return string.slice(begin);
+    	}
 
     });
 

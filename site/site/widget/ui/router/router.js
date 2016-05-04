@@ -65,7 +65,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 					hideMenu: true,
 					nav: 'index'
 				});
-				that.currentView = new view(queryString);
+				that.currentView = new view({querys:querys});
 			});
 		},
 		pageSearch: function(queryString){
@@ -76,7 +76,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 					hideMenu: false,
 					nav: 'search'
 				});
-				that.currentView = new view(queryString);
+				that.currentView = new view({querys:querys});
 			});
 		},
 		pageChatting: function(queryString){
@@ -87,7 +87,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 					hideMenu: false,
 					nav: 'chatting'
 				});
-				that.currentView = new view(queryString);
+				that.currentView = new view({querys:querys});
 			});
 		},
 		pageMy: function (queryString) {
@@ -99,7 +99,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 						hideMenu: false,
 						nav: 'my'
 					});
-					that.currentView = new view(queryString);
+					that.currentView = new view({querys:querys});
 				});
 			}else{
 				var redirectUrl = location.href;
@@ -115,7 +115,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 					hideMenu: true,
 					nav: 'index'
 				});
-				that.currentView = new view(queryString);
+				that.currentView = new view({querys:querys});
 			});
 		},
 		pageRegister: function(queryString){
@@ -126,7 +126,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 					hideMenu: true,
 					nav: 'index'
 				});
-				that.currentView = new view(queryString);
+				that.currentView = new view({querys:querys});
 			});
 		}
 
