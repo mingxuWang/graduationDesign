@@ -1,9 +1,9 @@
-define(['backbone', 'template', 'search/tpls'], function(Backbone, T, tpls) {
+define(['backbone', 'template', 'chatting/list/tpls'], function(Backbone, T, tpls) {
     var $canvas = $(document.body).find('#canvas');
 
     
     var index_model = Backbone.Model.extend({
-        url:'',
+        url:'/chatting/list',
         defaults: function() {
             return {
                 header: null,
@@ -28,9 +28,9 @@ define(['backbone', 'template', 'search/tpls'], function(Backbone, T, tpls) {
                 },
                 error: function (_, errorMsg) {
                     if (errorMsg === "timeout") {
-                        Alert.show("网络请求超时!");
+                        alert("网络请求超时!");
                     } else {
-                        Alert.show("您的网络似乎有问题, 请检查网络后重试!");
+                        alert("您的网络似乎有问题, 请检查网络后重试!");
                     }
                 }
             });
@@ -42,15 +42,14 @@ define(['backbone', 'template', 'search/tpls'], function(Backbone, T, tpls) {
         model: null,
         className: 'chatting-list',
         events: {
-            'click .main-cell': 'actBaoliaoDetail',
-            'click .list-item': 'actInfo'
+            'click .list-item': 'actRoom'
         },
         initialize: function() {
             this.model = new index_model();
             this.renderSkeleton();
             this.renderHeader();
             this.listenTo(this.model, 'change:list', this.renderList);
-            // this.model.getList();
+            this.model.getList();
         },
         renderSkeleton: function() {
             this.$el.html(T.compile(tpls.skeleton));
@@ -68,9 +67,16 @@ define(['backbone', 'template', 'search/tpls'], function(Backbone, T, tpls) {
             var list = that.model.get('list');
             this.$el.find('.main .list').append(T.compile(tpls.list)({ list: list }));
         },
-        actInfo: function(e) {
-            var id = $(e.currentTarget).data("id");
-            Backbone.history.navigate('index/info?id='+id,{trigger: true, replace: false});
+        actRoom: function(e) {
+            if(conf.is_login == true){
+                var id = $(e.currentTarget).data("id");
+                Backbone.history.navigate('chatting/room?id='+id,{trigger: true, replace: false});
+            }else{
+                var redirectUrl = location.href;
+                alert("登录后体验更多功能~");
+                Backbone.history.navigate('login?redirectUrl='+redirectUrl,{trigger: true, replace: false});
+            }
+            
 
         }
     });

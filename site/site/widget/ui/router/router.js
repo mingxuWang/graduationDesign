@@ -6,8 +6,10 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 			'index/info': 'pageInfo',
 			'search': 'pageSearch',
 			'chatting': 'pageChatting',
+			'chatting/room': 'pageChattingRoom',
 			'my':'pageMy',
 			'my/tips': 'pageTips',
+			'my/changePassword': 'pageChangePwd',
 			'register': 'pageRegister',
 			'login': 'pageLogin',
 			'*action' : 'pageIndex',
@@ -91,6 +93,17 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 				that.currentView = new view({querys:querys});
 			});
 		},
+		pageChattingRoom: function(queryString){
+			var that =this;
+			var querys = that.getQuerys(queryString);
+			require(['chatting/room/room'],function(view){
+				that.clean({
+					hideMenu: true,
+					nav: 'chatting'
+				});
+				that.currentView = new view({querys:querys});
+			});
+		},
 		pageMy: function (queryString) {
 			var that = this;
 			var querys = that.getQuerys(queryString);
@@ -109,10 +122,21 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 			}
 
 		},
-		pageTips: function(){
+		pageTips: function(queryString){
 			var that =this;
 			var querys = that.getQuerys(queryString);
 			require(['my/tips/tips'],function(view){
+				that.clean({
+					hideMenu: true,
+					nav: 'my'
+				});
+				that.currentView = new view({querys:querys});
+			});
+		},
+		pageChangePwd: function(queryString){
+			var that =this;
+			var querys = that.getQuerys(queryString);
+			require(['my/change-pwd/change-pwd'],function(view){
 				that.clean({
 					hideMenu: true,
 					nav: 'my'
@@ -128,6 +152,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 					hideMenu: true,
 					nav: 'index'
 				});
+				console.log(querys);
 				that.currentView = new view({querys:querys});
 			});
 		},

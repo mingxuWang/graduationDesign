@@ -18,9 +18,9 @@ define(function(){
                 '<span class="name">{{item.name}}</span>',
             '</div>',
             '<ul class="item-list">',
-                '<li>推送消息</li>',
-                '<li>收藏医疗点</li>',
-                '<li>修改个人信息</li>',
+                '<li class="tips">推送消息</li>',
+                '<li class="collection">收藏医疗点</li>',
+                '<li class="change-pwd">修改密码</li>',
             '</ul>'
         ].join('')
     };

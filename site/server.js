@@ -60,6 +60,43 @@ app.get('/index/list',function(req,res){
 	    src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
 	}]
 	res.send(testArr);
+});
+
+app.get('/chatting/list',function(req,res){
+	var testArr = [{
+	    id: '123',
+	    title: '我是一个测试聊天室',
+	    date: '5月3日',
+	    area:'北京市海淀区',
+	    intro: '我们来聊聊音乐吧!',
+	    src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
+	},
+	{
+	    id: '123',
+	    title: '我是一个测试聊天室',
+	    date: '5月3日',
+	    area:'北京市海淀区',
+	    intro: '我们来聊聊音乐吧!',
+	    src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
+	},
+	{
+	    id: '123',
+	    title: '我是一个测试聊天室',
+	    date: '5月3日',
+	    area:'北京市海淀区',
+	    intro: '我们来聊聊音乐吧!',
+	    src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
+	},
+	{
+	    id: '123',
+	    title: '我是一个测试聊天室',
+	    date: '5月3日',
+	    area:'北京市海淀区',
+	    intro: '我们来聊聊音乐吧!',
+	    src: 'http://www.uimaker.com/uploads/160421/1-1604211334301a.jpg'
+	}
+	]
+	res.send(testArr);
 })
 
 app.post('/account/login',function(req,res){

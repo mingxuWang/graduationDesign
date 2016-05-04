@@ -21,7 +21,9 @@ define(['backbone', 'template', 'my/tpls', 'ui/helper/helper'], function(Backbon
         events: {
             'click .main-cell': 'actBaoliaoDetail',
             'click .list-item': 'actInfo',
-            'click .sign-out': 'actSignOut'
+            'click .sign-out': 'actSignOut',
+            'click .tips': 'pageTips',
+            'click .change-pwd': 'pageChangePwd'
         },
         initialize: function() {
             this.model = new Model();
@@ -48,6 +50,12 @@ define(['backbone', 'template', 'my/tpls', 'ui/helper/helper'], function(Backbon
             helper.setItem('is_login',false);
             conf.is_login=false;
             Backbone.history.navigate('index', { trigger: true, replace: false });
+        },
+        pageTips: function(){
+            Backbone.history.navigate('my/tips', { trigger: true, replace: false });
+        },
+        pageChangePwd: function(){
+            Backbone.history.navigate('my/changePassword', { trigger: true, replace: false });
         }
     });
     return View;
