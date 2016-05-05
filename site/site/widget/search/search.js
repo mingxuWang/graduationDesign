@@ -145,6 +145,8 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
         getPosition: function() {
             if (geo.checkGeo()) {
                 pos = geo.getPosition();
+                $('.navigate').css('display','none');
+                $('#panel').html('');
             } else {
                 alert('您的手机不支持定位功能！请手动拖动~');
             }

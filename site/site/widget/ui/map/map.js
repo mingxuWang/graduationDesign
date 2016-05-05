@@ -12,6 +12,14 @@ define(['jquery'], function($) {
                     zoom: 17,
                     center: [opt.lng, opt.lat]
                 });
+
+                // PC调试用的控件
+                AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
+                    function() {
+                        mapshow.addControl(new AMap.ToolBar());
+                        mapshow.addControl(new AMap.Scale());
+                    });
+
                 var clickEventListener = mapshow.on('click', function(e) {
                     conf.end.lng = e.lnglat.getLng();
                     conf.end.lat = e.lnglat.getLat();
@@ -38,6 +46,13 @@ define(['jquery'], function($) {
                     alert('成功获取该位置坐标，可以进行导航！');
                     $('.navigate').css('display', 'block');
                 });
+                // PC调试用的控件
+                AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
+                    function() {
+                        mapshow.addControl(new AMap.ToolBar());
+                        mapshow.addControl(new AMap.Scale());
+                    });
+
                 marker = new AMap.Marker({
                     position: [opt.lng, opt.lat],
                     map: mapshow,
@@ -88,32 +103,32 @@ define(['jquery'], function($) {
 
         },
         drivingSearch: function() {
-        	AMap.service('AMap.Driving',function(){//回调函数
-        	        //构造路线导航类
-        	        var driving = new AMap.Driving({
-        	            map: mapshow,
-        	            panel: "panel"
-        	        });
-        	        // 根据起终点经纬度规划驾车导航路线
-        	        driving.search(new AMap.LngLat(conf.begin.lng, conf.begin.lat), new AMap.LngLat(conf.end.lng, conf.end.lat));
-        	    })
-            
+            AMap.service('AMap.Driving', function() { //回调函数
+                //构造路线导航类
+                var driving = new AMap.Driving({
+                    map: mapshow,
+                    panel: "panel"
+                });
+                // 根据起终点经纬度规划驾车导航路线
+                driving.search(new AMap.LngLat(conf.begin.lng, conf.begin.lat), new AMap.LngLat(conf.end.lng, conf.end.lat));
+            })
+
         },
         busSearch: function() {
-        	AMap.service('AMap.Transfer',function(){//回调函数
-        	        //实例化Transfer
-        	        var transOptions = {
-        	            map: mapshow,
-        	            city: '邯郸市',
-        	            panel: 'panel',
-        	            policy: AMap.TransferPolicy.LEAST_TIME
-        	        };
-        	        //构造公交换乘类
-        	        var transfer = new AMap.Transfer(transOptions);
-        	        //根据起、终点坐标查询公交换乘路线
-        	        transfer.search(new AMap.LngLat(conf.begin.lng, conf.begin.lat), new AMap.LngLat(conf.end.lng, conf.end.lat));
-        	    });
-            
+            AMap.service('AMap.Transfer', function() { //回调函数
+                //实例化Transfer
+                var transOptions = {
+                    map: mapshow,
+                    city: '邯郸市',
+                    panel: 'panel',
+                    policy: AMap.TransferPolicy.LEAST_TIME
+                };
+                //构造公交换乘类
+                var transfer = new AMap.Transfer(transOptions);
+                //根据起、终点坐标查询公交换乘路线
+                transfer.search(new AMap.LngLat(conf.begin.lng, conf.begin.lat), new AMap.LngLat(conf.end.lng, conf.end.lat));
+            });
+
         }
     };
 
