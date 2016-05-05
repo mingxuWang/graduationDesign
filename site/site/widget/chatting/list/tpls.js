@@ -19,10 +19,11 @@ define(function(){
                     '<span class="list-title">{{item.title}}</span>',
                     '<span class="list-date">{{item.date}}</span>',
                 '</div>',
-                '<div class="list-summary">{{item.area}}</div>',
-                '<div class="list-intro">{{item.intro}}</div>',
+                '<div class="list-area">{{item.area}}</div>',
+                '<div class="list-intro">简介：{{item.intro}}</div>',
             '</li>',
-            '{{/each}}'
+            '{{/each}}',
+            '<div class="empty"></div>'
         ].join('')
     };
     return tpls;

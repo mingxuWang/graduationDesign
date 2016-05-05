@@ -11,7 +11,7 @@
             if($('#map').data('exist')){
                 var sumHei = window.screen.availHeight;
                 var headerHei = $('header').height();
-                var height = sumHei-headerHei;
+                var height = sumHei-headerHei-5;
                 $('#map').height(height);
             }
         },70);
@@ -22,4 +22,6 @@
     window.conf = {};
     conf.is_login = localStorage.getItem('is_login') || false;
     conf.user_data = null;
+    conf.end = {};
+    conf.begin = {};
 })();

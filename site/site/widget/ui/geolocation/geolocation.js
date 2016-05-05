@@ -16,11 +16,12 @@ define(['ui/map/map'],function(map) {
         	var coords = position.coords;
         	var lng = coords.longitude;
         	var lat = coords.latitude;
-        	var position = {
+        	var pos = {
         		lng:lng,
         		lat:lat
         	}
-        	map.init(position);
+        	map.init(pos);
+            return pos;
         },
         errorFun: function(error){
         	alert(error.msg);

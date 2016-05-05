@@ -2,9 +2,165 @@
   height: 100%;
 }
 .search .main {
-  height: 100%;
+  position: relative;
+}
+.search .main .header .position {
+  position: absolute;
+  top: 0.39rem;
+  left: 0.2rem;
+  width: 1.4rem;
+  height: 0.75rem;
+  font-size: 0.5rem;
+  border-radius: 0.2rem;
+  background-color: white;
+  color: #01bc8f;
+  text-align: center;
+}
+.search .main .header .show-hide {
+  position: absolute;
+  top: 0.39rem;
+  right: 0.2rem;
+  width: 2rem;
+  height: 0.75rem;
+  line-height: 0.75rem;
+  font-size: 0.4rem;
+  border-radius: 0.2rem;
+  background-color: white;
+  color: #01bc8f;
+  text-align: center;
 }
 .search .main #map {
   width: 10.8rem;
   height: 20rem;
+}
+.search .main #panel {
+  z-index: 60;
+  position: absolute;
+  background-color: white;
+  overflow-y: auto;
+  right: 0.1rem;
+  top: 0.2rem;
+  width: 6rem;
+  max-height: 5rem;
+}
+.search .main .search-btn {
+  z-index: 99;
+  position: fixed;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+}
+.search .main .search-btn .btn {
+  font-size: 0.6rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  border-radius: 0.7rem;
+  margin: 0.4rem;
+  background-color: #01bc8f;
+  text-align: center;
+  color: white;
+}
+.search .main .search-btn .navigate {
+  display: none;
+}
+.search .main .search-panel {
+  display: none;
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 10rem;
+  height: 5rem;
+  border-radius: 0.3rem;
+  background-color: #01bc8f;
+  color: white;
+}
+.search .main .search-panel .close {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  right: 0.2rem;
+  top: 0.2rem;
+}
+.search .main .search-panel .search-type .type-part {
+  margin-top: 0.3rem;
+  text-align: center;
+  font-size: 0.6rem;
+}
+.search .main .search-panel .search-type .type-part span {
+  padding: 0.3rem;
+}
+.search .main .search-panel .search-type .type-part span label {
+  padding-right: 0.2rem;
+}
+.search .main .search-panel .search-area {
+  position: relative;
+  margin-top: 0.2rem;
+}
+.search .main .search-panel .search-area .area-part .area-title {
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
+  padding: 0.1rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.search .main .search-panel .search-area .area-part .area-list {
+  position: absolute;
+  left: 1.7rem;
+  top: 0rem;
+  font-size: 0.5rem;
+}
+.search .main .search-panel .search-area .area-part .area-list .area-item {
+  display: block;
+  float: left;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding: 0.1rem;
+  margin: 0.1rem;
+}
+.search .main .search-panel .search-area .area-part .area-list .area-item label {
+  padding-right: 0.2rem;
+}
+.search .main .search-panel .search-ok {
+  position: absolute;
+  margin: 0 auto;
+  bottom: 0.2rem;
+  text-align: center;
+  width: 10rem;
+}
+.search .main .search-panel .search-ok .btn {
+  margin: 0 auto;
+  width: 3rem;
+  height: 0.8rem;
+  font-size: 0.6rem;
+  line-height: 0.8rem;
+  border-radius: 0.3rem;
+  text-align: center;
+  background-color: white;
+  color: #01bc8f;
+}
+.search .main .search-panel .navigate-panel .navigate-list {
+  position: relative;
+}
+.search .main .search-panel .navigate-panel .navigate-list .navigate-title {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+  font-size: 0.7rem;
+}
+.search .main .search-panel .navigate-panel .navigate-list .navigate-type {
+  float: left;
+  text-align: center;
+  width: 2rem;
+  height: 1.4rem;
+  margin: 0.65rem;
+  margin-top: 2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 0.3rem;
+  line-height: 1.4rem;
+  font-size: 0.6rem;
+  background-color: white;
+  color: #01bc8f;
 }

@@ -21,7 +21,8 @@ define(function(){
                 '</div>',
                 '<div class="list-summary">{{item.summary}}</div>',
             '</li>',
-            '{{/each}}'
+            '{{/each}}',
+            '<div class="empty"></div>'
         ].join('')
     };
     return tpls;

@@ -13,9 +13,6 @@
 			background-color: white;
 		}
 		.list{
-			&:last-child{
-				margin-bottom: 1.5rem;
-			}
 			li{
 				.px2rem(width,1000);
 				.px2rem(height,300);
@@ -42,7 +39,7 @@
 						font-size: 0.3rem;
 					}
 				}
-				.list-summary{
+				.list-area{
 					.px2rem(font-size,40);
 					overflow : hidden;
 					text-overflow: ellipsis;
@@ -50,6 +47,18 @@
 					-webkit-line-clamp: 3;
 					-webkit-box-orient: vertical;
 				}
+				.list-intro{
+					.px2rem(font-size,36);
+					overflow : hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 3;
+					-webkit-box-orient: vertical;
+				}
+			}
+			.empty{
+				height: 1.6rem;
+				.px2rem(width,1080);
 			}
 
 		}

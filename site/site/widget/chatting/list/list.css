@@ -5,9 +5,6 @@
   margin-top: 0.2rem;
   background-color: white;
 }
-.chatting-list .main .list:last-child {
-  margin-bottom: 1.5rem;
-}
 .chatting-list .main .list li {
   width: 10rem;
   height: 3rem;
@@ -35,11 +32,23 @@
   padding-left: 0.3rem;
   font-size: 0.3rem;
 }
-.chatting-list .main .list li .list-summary {
+.chatting-list .main .list li .list-area {
   font-size: 0.4rem;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+.chatting-list .main .list li .list-intro {
+  font-size: 0.36rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.chatting-list .main .list .empty {
+  height: 1.6rem;
+  width: 10.8rem;
 }
