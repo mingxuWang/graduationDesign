@@ -14,11 +14,11 @@ define(['jquery'], function($) {
                 });
 
                 // PC调试用的控件
-                AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
-                    function() {
-                        mapshow.addControl(new AMap.ToolBar());
-                        mapshow.addControl(new AMap.Scale());
-                    });
+                // AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
+                //     function() {
+                //         mapshow.addControl(new AMap.ToolBar());
+                //         mapshow.addControl(new AMap.Scale());
+                //     });
 
                 var clickEventListener = mapshow.on('click', function(e) {
                     conf.end.lng = e.lnglat.getLng();
@@ -47,11 +47,11 @@ define(['jquery'], function($) {
                     $('.navigate').css('display', 'block');
                 });
                 // PC调试用的控件
-                AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
-                    function() {
-                        mapshow.addControl(new AMap.ToolBar());
-                        mapshow.addControl(new AMap.Scale());
-                    });
+                // AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
+                //     function() {
+                //         mapshow.addControl(new AMap.ToolBar());
+                //         mapshow.addControl(new AMap.Scale());
+                //     });
 
                 marker = new AMap.Marker({
                     position: [opt.lng, opt.lat],

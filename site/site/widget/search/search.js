@@ -75,6 +75,24 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
         symptom: '医院',
         disease: '医院'
     };
+    var symptom_list = [
+        {
+            value: 'headache',
+            show:'头疼',
+            level_low:'内科诊所',
+            level_high:'脑科医院'
+        }
+    ];
+    var search_level=[
+        {
+            value:'low',
+            show:'轻微'
+        },
+        {
+            value:'high',
+            show: '严重'
+        }
+    ]
 
     var index_model = Backbone.Model.extend({
         url: '',
@@ -96,6 +114,8 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             'click .navigate':'renderNavigatePanel',
             'click .close': 'actClose',
             'click .type-item': 'actShowSelection',
+            'click .detail-item': 'actShowlevel',
+            'click .level-item': 'actShowArea',
             'click .drugstore': 'actShowArea',
             'click .ok': 'actSearch',
             'click .show-hide':'actToggle',
@@ -134,12 +154,25 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             this.$el.find('.main .search-btn').html(T.compile(tpls.search_btn));
         },
         renderSearchPanel: function() {
-            $('.main .search-panel').css('display', 'block');
-            this.$el.find('.main .search-panel .search-type').html(T.compile(tpls.search_type)({list:search_type}))
+            var that = this;
+            if(that.checkLogin()){
+                $('.main .search-panel').css('display', 'block');
+                this.$el.find('.main .search-panel .search-type').html(T.compile(tpls.search_type)({list:search_type}));
+            }else{
+                alert('登陆后享受更多功能！');
+                Backbone.history.navigate('/my',{trigger:true,replace:false});
+            }
+
         },
         renderNavigatePanel: function(){
-            $('.main .search-panel').css('display', 'block');
-            this.$el.find('.main .search-panel .navigate-panel').html(T.compile(tpls.navigate_list));
+            var that = this;
+            if(that.checkLogin()){
+                $('.main .search-panel').css('display', 'block');
+                this.$el.find('.main .search-panel .navigate-panel').html(T.compile(tpls.navigate_list));
+            }else{
+                alert('登陆后享受更多功能！');
+                Backbone.history.navigate('/my',{trigger:true,replace:false});
+            }
 
         },
         getPosition: function() {
@@ -159,6 +192,7 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
         actClose: function() {
             $('.search-type').html('');
             $('.search-detail').html('');
+            $('.search-level').html('');            
             $('.search-area').html('');
             $('.search-ok').html('');
             $('.navigate-panel').html('');
@@ -172,7 +206,15 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             console.log(type);
             if (type == 'drugstore') {
                 that.actShowArea();
+            }else if(type == 'symptom'){
+                that.actShowDetail(symptom_list);
             }
+        },
+        actShowDetail: function(detail_list){
+            this.$el.find('.main .search-panel .search-detail').html(T.compile(tpls.search_detail)({list:detail_list}));
+        },
+        actShowlevel:function(){
+            this.$el.find('.main .search-panel .search-level').html(T.compile(tpls.search_level)({list:search_level}));
         },
         actShowArea: function(){
             this.$el.find('.main .search-panel .search-area').html(T.compile(tpls.search_area)({list:search_area}));
@@ -184,6 +226,17 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
         actSearch: function() {
             var that = this;
             var type = key_type[$('input[name=type]:checked').val()];
+            console.log(type);
+            if(type == '医院'){
+                var level = $('input[name=level]:checked').val();
+                if(level == "high"){
+                    type = $('input[name=detail]:checked').data('level-high');
+                }else{
+                    type = $('input[name=detail]:checked').data('level-low');
+
+                }
+                console.log(type);
+            }
             var mile = $('input[name=area]:checked').val();
             that.getMarkerPosition();
             opt = {
@@ -208,6 +261,13 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             }else{
                 map.drivingSearch();
                 that.actClose();
+            }
+        },
+        checkLogin:function(){
+            if(conf.is_login == true || conf.is_login == "true" ){
+                return true;
+            }else{
+                return false;
             }
         }
     });

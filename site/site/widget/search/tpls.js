@@ -13,6 +13,7 @@ define(function() {
                     '<img class="close" src="../../static/imgs/exit.png" alt="" />',
                     '<div class="search-type"></div>',
                     '<div class="search-detail"></div>',
+                    '<div class="search-level"></div>',
                     '<div class="search-area"></div>',
                     '<div class="search-ok"></div>',
                     '<div class="navigate-panel"></div>',
@@ -40,7 +41,28 @@ define(function() {
             '</div>'
         ].join(''),
         search_detail:[
-
+            '<div class="detail-part">',
+                '<div class="detail-title">详情：</div>',
+                '<div class="detail-list">',
+                    '{{each list as item index}}',
+                        '<span class="detail-item">',
+                            '<label for={{item.value}}>{{item.show}}</label><input  name="detail" id={{item.value}} data-level-low={{item.level_low}} data-level-high={{item.level_high}} value={{item.value}} type="radio" />',
+                        '</span>',
+                    '{{/each}}',
+                '</div>',
+            '</div>'
+        ].join(''),
+        search_level:[
+            '<div class="level-part">',
+                '<div class="level-title">程度：</div>',
+                '<div class="level-list">',
+                    '{{each list as item index}}',
+                        '<span class="level-item">',
+                            '<label for={{item.value}}>{{item.show}}</label><input  name="level" id={{item.value}} value={{item.value}} type="radio" />',
+                        '</span>',
+                    '{{/each}}',
+                '</div>',
+            '</div>'
         ].join(''),
         search_area:[
             '<div class="area-part">',

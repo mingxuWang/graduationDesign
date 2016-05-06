@@ -72,7 +72,7 @@
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
   width: 10rem;
-  height: 5rem;
+  height: 7rem;
   border-radius: 0.3rem;
   background-color: #01bc8f;
   color: white;
@@ -93,6 +93,64 @@
   padding: 0.3rem;
 }
 .search .main .search-panel .search-type .type-part span label {
+  padding-right: 0.2rem;
+}
+.search .main .search-panel .search-detail {
+  position: relative;
+  margin-top: 0.2rem;
+}
+.search .main .search-panel .search-detail .detail-part .detail-title {
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
+  padding: 0.1rem;
+  height: 0.7rem;
+  width: 2.2rem;
+  line-height: 0.7rem;
+}
+.search .main .search-panel .search-detail .detail-part .detail-list {
+  position: absolute;
+  left: 2rem;
+  top: 0rem;
+  font-size: 0.5rem;
+}
+.search .main .search-panel .search-detail .detail-part .detail-list .detail-item {
+  display: block;
+  float: left;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  padding: 0.1rem;
+  margin: 0.1rem;
+}
+.search .main .search-panel .search-detail .detail-part .detail-list .detail-item label {
+  padding-right: 0.2rem;
+}
+.search .main .search-panel .search-level {
+  position: relative;
+  margin-top: 0.2rem;
+}
+.search .main .search-panel .search-level .level-part .level-title {
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
+  padding: 0.1rem;
+  height: 0.7rem;
+  width: 2.2rem;
+  line-height: 0.7rem;
+}
+.search .main .search-panel .search-level .level-part .level-list {
+  position: absolute;
+  left: 2rem;
+  top: 0rem;
+  font-size: 0.5rem;
+}
+.search .main .search-panel .search-level .level-part .level-list .level-item {
+  display: block;
+  float: left;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  padding: 0.1rem;
+  margin: 0.1rem;
+}
+.search .main .search-panel .search-level .level-part .level-list .level-item label {
   padding-right: 0.2rem;
 }
 .search .main .search-panel .search-area {
