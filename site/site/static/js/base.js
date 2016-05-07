@@ -19,8 +19,8 @@
     completed();
     window.onresize = completed;
     window.conf = {};
-    conf.is_login = localStorage.getItem('is_login') || false;
-    conf.user_data = null;
+    conf.is_login = JSON.parse(localStorage.getItem('is_login')) || false;
+    conf.user_data = JSON.parse(localStorage.getItem('user_data')) || {};
     conf.end = {};
     conf.begin = {};
 })();

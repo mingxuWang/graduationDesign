@@ -41,8 +41,8 @@ define(['backbone', 'template', 'my/tpls', 'ui/helper/helper'], function(Backbon
         },
         renderTop: function() {
             var item = {
-                gender : 'male',
-                name : '隔壁老王'
+                gender : conf.user_data.gender,
+                name : conf.user_data.name
             }
             this.$el.find('.main .personal-info').html(T.compile(tpls.top)({item:item}));
         },

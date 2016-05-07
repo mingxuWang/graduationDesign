@@ -1,7 +1,9 @@
 var application_root = __dirname,
     express = require('express'),
     path = require('path'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    crypto = require('crypto');
+var AccountSchema, Account;
 
 var app = express();
 
@@ -98,17 +100,111 @@ app.get('/chatting/list', function(req, res) {
 app.post('/account/login', function(req, res) {
     var user = req.body.username;
     var pwd = req.body.password;
-    if (user == '111' && pwd == '222') {
-        var response = {
-            ret: 0,
-            name: 'xiaoming',
-            age: 20
+    var user = {
+        username: req.body.username,
+        password: req.body.password
+    };
+    Account.findOne({ username: user.username, password: user.password }, function(err, doc) {
+        if (doc != null) {
+            var resp = {
+                ret :1,
+                userInfo:doc
+            }
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg : '用户名/密码错误'
+            }
+            res.send(resp);
         }
-        res.send(response);
-    } else {
-        console.log('测试失败');
+
+    });
+
+});
+app.post('/account/register', function(req, res) {
+
+    var user = {
+        username: req.body.username,
+        password: req.body.password,
+        name: req.body.name,
+        gender: req.body.gender,
+        birth_year: req.body.birth_year,
+        phone: req.body.phone,
+        hobbies: req.body.hobbies,
+        disease: req.body.disease
+    };
+    Account.findOne({username:req.body.username},function(err,doc){
+        if(doc != null){
+            var resp = {
+                ret :0,
+                msg : '已存在该账号！'
+            }
+            res.send(resp);
+        }else{
+            register(user);
+            var resp = {
+                ret :1,
+                msg : '注册成功，请登录！'
+            }
+            res.send(resp);
+        }
+    })
+    
+});
+
+
+
+// 数据库连接相关
+var db = mongoose.createConnection('localhost', 'laoyousuoyi');
+db.on('error', console.error.bind(console, '连接错误:'));
+db.once('open', function() {
+    AccountSchema = new mongoose.Schema({
+        username: { type: String, unique: true },
+        password: { type: String },
+        name: { type: String },
+        gender: { type: String },
+        birth_year: { type: Number },
+        phone: { type: Number },
+        hobbies: { type: [] },
+        disease: { type: [] },
+        collections:{type:[]},
+        tips:{type:[]}
+    });
+    Account = db.model('Account', AccountSchema);
+});
+
+var register = function(userInfo) {
+    var shaSum = crypto.createHash('sha256');
+    shaSum.update(userInfo.password);
+    var user = new Account({
+        username: userInfo.username,
+        password: userInfo.password,
+        name: userInfo.name,
+        gender: userInfo.gender,
+        birth_year: userInfo.birth_year,
+        phone: userInfo.phone,
+        hobbies: userInfo.hobbies,
+        disease: userInfo.disease
+    });
+    user.save(registerCallback);
+};
+var registerCallback = function(err) {
+    if (err) {
+        return console.log(err);
     }
-})
+    return console.log('Account was created');
+};
+var checkAccount = function(userInfo) {
+    Account.find({ username: userInfo.username, password: userInfo.password }, function(err, doc) {
+        if (doc != null) {
+            console.log(doc);
+        }
+
+    });
+
+};
+
 
 var port = 4711;
 app.listen(port, function() {

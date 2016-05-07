@@ -62,12 +62,14 @@ define(['backbone', 'template', 'account/login/tpls','ui/helper/helper'], functi
                 },
                 type: "POST",
                 success: function(response) {
-                    if (response.ret === 0) {
+                    if (response.ret === 1) {
                         conf.is_login = true;
+                        conf.user_data = response.userInfo;
                         helper.setItem('is_login',true);
+                        helper.setItem('user_data',response.userInfo);
                         Backbone.history.navigate(that.router, { trigger: true, replace: false });
                     } else {
-                        Alert.show(response.msg);
+                        alert(response.msg);
                     }
                 },
                 error: function() {
