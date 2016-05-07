@@ -46,7 +46,7 @@ define(function() {
                 '<div class="detail-list">',
                     '{{each list as item index}}',
                         '<span class="detail-item">',
-                            '<label for={{item.value}}>{{item.show}}</label><input  name="detail" id={{item.value}} data-level-low={{item.level_low}} data-level-high={{item.level_high}} value={{item.value}} type="radio" />',
+                            '<label for={{item.value}}>{{item.show}}</label><input  name="detail" id={{item.value}} data-level-low={{item.level_low}} data-level-middle={{item.level_middle}} data-level-high={{item.level_high}} value={{item.value}} type="radio" />',
                         '</span>',
                     '{{/each}}',
                 '</div>',

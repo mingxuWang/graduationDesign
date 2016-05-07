@@ -78,10 +78,118 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
     var symptom_list = [
         {
             value: 'headache',
-            show:'头疼',
-            level_low:'内科诊所',
+            show:'头昏',
+            level_low:'社区医疗',
+            level_middle:'内科诊所',
             level_high:'脑科医院'
-        }
+        },
+        {
+            value: 'heat',
+            show:'发热',
+            level_low:'诊所',
+            level_middle:'社区医疗',
+            level_high:'医院'
+        },
+        {
+            value: 'appetite',
+            show:'食欲不振',
+            level_low:'诊所',
+            level_middle:'社区医疗',
+            level_high:'医院'
+        },
+        {
+            value: 'cough',
+            show:'食欲不振',
+            level_low:'诊所',
+            level_middle:'社区医疗',
+            level_high:'医院'
+        },
+        {
+            value: 'powerless',
+            show:'四肢无力',
+            level_low:'诊所',
+            level_middle:'社区医疗',
+            level_high:'医院'
+        },
+        {
+            value: 'heart',
+            show:'心绞痛',
+            level_low:'社区医疗',
+            level_middle:'心血管诊所',
+            level_high:'心血管医院'
+        },
+        {
+            value: 'knee',
+            show:'关节痛',
+            level_low:'诊所',
+            level_middle:'骨科诊所',
+            level_high:'骨科医院'
+        },
+    ];
+    var disease_list = [
+        {
+            value: 'eye',
+            show:'眼疾',
+            level_low:'诊所',
+            level_middle:'眼科医院',
+            level_high:'大医院'
+        },
+        {
+            value: 'ear',
+            show:'耳鸣',
+            level_low:'耳鼻喉科',
+            level_middle:'耳鼻喉医院',
+            level_high:'大医院'
+        },
+        {
+            value: 'heart',
+            show:'心脏病',
+            level_low:'心血管科',
+            level_middle:'心血管专科医院',
+            level_high:'大医院'
+        },
+        {
+            value: 'skin',
+            show:'皮炎',
+            level_low:'皮肤科',
+            level_middle:'皮肤专科医院',
+            level_high:'大医院'
+        },
+        {
+            value: 'teeth',
+            show:'口腔',
+            level_low:'口腔诊所',
+            level_middle:'口腔专科医院',
+            level_high:'大医院'
+        },
+        {
+            value: 'bone',
+            show:'骨折',
+            level_low:'骨科',
+            level_middle:'骨科专科医院',
+            level_high:'大医院'
+        },
+        {
+            value: 'heat',
+            show:'流感',
+            level_low:'呼吸科',
+            level_middle:'呼吸科医院',
+            level_high:'大医院'
+        },
+        {
+            value: 'sugar',
+            show:'糖尿病',
+            level_low:'内科',
+            level_middle:'内科医院',
+            level_high:'大医院'
+        },
+        {
+            value: 'liver',
+            show:'肝病',
+            level_low:'内科',
+            level_middle:'肝病专科医院',
+            level_high:'大医院'
+        },
     ];
     var search_level=[
         {
@@ -89,10 +197,14 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             show:'轻微'
         },
         {
+            value:'middle',
+            show:'中等'
+        },
+        {
             value:'high',
             show: '严重'
         }
-    ]
+    ];
 
     var index_model = Backbone.Model.extend({
         url: '',
@@ -203,11 +315,14 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             var type = $(e.currentTarget).data('type');
             $('.search-detail').html('');
             $('.search-area').html('');
-            console.log(type);
+            $('.search-level').html(''); 
+            // console.log(type);
             if (type == 'drugstore') {
                 that.actShowArea();
             }else if(type == 'symptom'){
                 that.actShowDetail(symptom_list);
+            }else{
+                that.actShowDetail(disease_list);
             }
         },
         actShowDetail: function(detail_list){
@@ -226,16 +341,18 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
         actSearch: function() {
             var that = this;
             var type = key_type[$('input[name=type]:checked').val()];
-            console.log(type);
+            // console.log(type);
             if(type == '医院'){
                 var level = $('input[name=level]:checked').val();
                 if(level == "high"){
                     type = $('input[name=detail]:checked').data('level-high');
-                }else{
+                }else if(level == "low"){
                     type = $('input[name=detail]:checked').data('level-low');
 
+                }else{
+                    type = $('input[name=detail]:checked').data('level-middle');
                 }
-                console.log(type);
+                // console.log(type);
             }
             var mile = $('input[name=area]:checked').val();
             that.getMarkerPosition();
@@ -247,6 +364,7 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             };
             that.actClose();
             map.nearBySearch(opt);
+            $('.collection').css('display','block');
         },
         actNavigate: function(e){
             var that = this;

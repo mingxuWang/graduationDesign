@@ -5,7 +5,6 @@
             var html = document.documentElement;
             var windowWidth = html.clientWidth;
             html.style.fontSize = windowWidth / RADIX + 'px';
-            html.classList.add('site-sales');
         }, 16);
         setTimeout(function(){
             if($('#map').data('exist')){

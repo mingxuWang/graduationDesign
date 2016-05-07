@@ -64,6 +64,9 @@
 .search .main .search-btn .navigate {
   display: none;
 }
+.search .main .search-btn .collection {
+  display: none;
+}
 .search .main .search-panel {
   display: none;
   z-index: 100;
@@ -72,7 +75,7 @@
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
   width: 10rem;
-  height: 7rem;
+  height: 7.5rem;
   border-radius: 0.3rem;
   background-color: #01bc8f;
   color: white;
@@ -126,7 +129,7 @@
 }
 .search .main .search-panel .search-level {
   position: relative;
-  margin-top: 0.2rem;
+  margin-top: 1.8rem;
 }
 .search .main .search-panel .search-level .level-part .level-title {
   font-size: 0.6rem;

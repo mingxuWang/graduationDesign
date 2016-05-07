@@ -3,8 +3,8 @@ define(['jquery'], function($) {
     var map = {
         init: function(options) {
             var defaults = {
-                lng: '114.46',
-                lat: '36.6'
+                lng: '114.492231',
+                lat: '36.60124'
             };
             if (options) {
                 opt = options;
@@ -12,13 +12,6 @@ define(['jquery'], function($) {
                     zoom: 17,
                     center: [opt.lng, opt.lat]
                 });
-
-                // PC调试用的控件
-                // AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
-                //     function() {
-                //         mapshow.addControl(new AMap.ToolBar());
-                //         mapshow.addControl(new AMap.Scale());
-                //     });
 
                 var clickEventListener = mapshow.on('click', function(e) {
                     conf.end.lng = e.lnglat.getLng();
@@ -37,7 +30,6 @@ define(['jquery'], function($) {
                 opt = defaults;
                 mapshow = new AMap.Map('map', {
                     zoom: 12
-                        // center: [opt.lng,opt.lat]
                 });
                 var clickEventListener = mapshow.on('click', function(e) {
                     // alert(e.lnglat.getLng() + ',' + e.lnglat.getLat());
