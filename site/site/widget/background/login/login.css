@@ -1,0 +1,25 @@
+.back-login .main .header {
+  text-align: center;
+  color: #01bc8f;
+}
+.back-login .main .header h1 {
+  font-size: 60px;
+  margin: 20px 0;
+}
+.back-login .main .header div {
+  font-size: 40px;
+}
+.back-login .main .login-form .form-group .item {
+  margin: 20px auto;
+}
+.back-login .main .login-form .form-group .item label {
+  height: 40px;
+  line-height: 40px;
+}
+.back-login .main .login-form .form-group .item input {
+  height: 40px;
+  line-height: 40px;
+}
+.back-login .main .login-form .btn-success {
+  background-color: #01bc8f;
+}

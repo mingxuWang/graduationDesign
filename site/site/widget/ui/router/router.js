@@ -20,7 +20,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 			this.mainNav = mainNav;
 		},
 		clean: function (options) {
-			console.log(this.currentView);
+			// console.log(this.currentView);
 			if (this.currentView) {
 				if(this.currentView.close) {
 					this.currentView.close();

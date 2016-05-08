@@ -95,8 +95,30 @@ app.get('/chatting/list', function(req, res) {
         src: 'static/imgs/6.jpeg'
     }];
     res.send(testArr);
-})
-
+});
+app.post('/account/admin/login',function(req,res){
+    var user = req.body.username;
+    var pwd = req.body.password;
+    var user = {
+        username: req.body.username,
+        password: req.body.password
+    };
+    AdminAccount.findOne({username:user.username,password:user.password},function(err,doc){
+        if (doc != null) {
+            var resp = {
+                ret :1,
+                userInfo:doc
+            }
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg : '用户名/密码错误'
+            }
+            res.send(resp);
+        }
+    })
+});
 app.post('/account/login', function(req, res) {
     var user = req.body.username;
     var pwd = req.body.password;
@@ -104,7 +126,7 @@ app.post('/account/login', function(req, res) {
         username: req.body.username,
         password: req.body.password
     };
-    Account.findOne({ username: user.username, password: user.password }, function(err, doc) {
+    Account.findOne({ username: user.username, password: user.password }, {name:1,gender:1},function(err, doc) {
         if (doc != null) {
             var resp = {
                 ret :1,
@@ -122,6 +144,7 @@ app.post('/account/login', function(req, res) {
     });
 
 });
+
 app.post('/account/register', function(req, res) {
 
     var user = {
@@ -153,6 +176,37 @@ app.post('/account/register', function(req, res) {
     
 });
 
+app.post('/account/changePassword',function(req,res){
+    var old_pwd = req.body.old_pwd;
+    var new_pwd = req.body.new_pwd;
+    var id = req.body.id;
+    Account.findOne({_id:id,password:old_pwd},{_id:1},function(err,doc){
+        if(doc != null){
+            Account.update({_id:id},{$set:{password:new_pwd}},{upsert:false},function(err){
+                if(err){
+                    var resp = {
+                        ret :0,
+                        msg:err
+                    }
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :1,
+                        msg:'修改成功，请重新登录！'
+                    }
+                    res.send(resp);
+                }
+            });
+        }else{
+            var resp = {
+                ret :0,
+                msg:'原密码错误，请重新输入！'
+            }
+            res.send(resp);
+        }
+    });
+})
+
 
 
 // 数据库连接相关
@@ -171,7 +225,13 @@ db.once('open', function() {
         collections:{type:[]},
         tips:{type:[]}
     });
+    AdminAccountSchema = new mongoose.Schema({
+        username: { type: String, unique: true },
+        password: { type: String },
+        name: { type: String }
+    });
     Account = db.model('Account', AccountSchema);
+    AdminAccount = db.model('AdminAccount',AdminAccountSchema);
 });
 
 var register = function(userInfo) {

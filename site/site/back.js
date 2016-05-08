@@ -1,5 +1,5 @@
 /**
- * Created by wmx on 16/4/15.
+ * Created by wmx on 16/5/8.
  */
 (function(){
     require.config({
@@ -27,7 +27,7 @@
         }
     });
     
-    require(['backbone', 'underscore', 'ui/router/router'], function(){
+    require(['backbone', 'underscore', 'ui/back/router/router'], function(){
         Backbone.history.start();   //开始监控url变化
     });
 })(window);

@@ -67,7 +67,7 @@ define(['backbone', 'template', 'account/login/tpls','ui/helper/helper'], functi
                         conf.user_data = response.userInfo;
                         helper.setItem('is_login',true);
                         helper.setItem('user_data',response.userInfo);
-                        Backbone.history.navigate(that.router, { trigger: true, replace: false });
+                        Backbone.history.navigate('my', { trigger: true, replace: false });
                     } else {
                         alert(response.msg);
                     }

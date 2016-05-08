@@ -1,51 +1,15 @@
-define(['backbone', 'template', 'my/change-pwd/tpls'], function(Backbone, T, tpls) {
+define(['backbone', 'template', 'my/change-pwd/tpls','ui/helper/helper'], function(Backbone, T, tpls,helper) {
     var $canvas = $(document.body).find('#canvas');
 
-
-    var index_model = Backbone.Model.extend({
-        url: '/index/list',
-        defaults: function() {
-            return {
-                header: null,
-                banner: null,
-                list: null
-            }
-        },
-        getList: function() {
-            var that = this;
-            that.fetch({
-                dataType: "json",
-                // data: keys,
-                timeout: 20000,
-                cache: false,
-                success: function(_, response) {
-                    if (response) {
-                        //TODO 单线请求,可以这样;但是多线请求,可能就会出问题了
-                        that.set({ list: response });
-                    } else {
-                        Alert.show(response.msg);
-                    }
-                },
-                error: function(_, errorMsg) {
-                    if (errorMsg === "timeout") {
-                        Alert.show("网络请求超时!");
-                    } else {
-                        Alert.show("您的网络似乎有问题, 请检查网络后重试!");
-                    }
-                }
-            });
-
-        }
-    });
     var index_view = Backbone.View.extend({
         tagName: 'div',
         model: null,
         className: 'change-pwd',
         events: {
-            'click .act-back': 'actBack'
+            'click .act-back': 'actBack',
+            'click .ok': 'actChange'
         },
         initialize: function() {
-            this.model = new index_model();
             this.renderSkeleton();
             this.renderHeader();
             this.renderChange();
@@ -59,6 +23,40 @@ define(['backbone', 'template', 'my/change-pwd/tpls'], function(Backbone, T, tpl
         },
         renderChange:function(){
             this.$el.find('.main .change').html(T.compile(tpls.change));
+        },
+        actChange: function(){
+            var data = {
+                old_pwd: $('#old_pwd').val(),
+                new_pwd: $('#new_pwd').val(),
+                id: conf.user_data._id
+            };
+            $.ajax({
+                url: '/account/changePassword',
+                type: 'POST',
+                dataType: 'json',
+                data: data,
+            })
+            .done(function(res) {
+                if(res.ret ===1){
+                    alert(res.msg);
+                    conf.user_data = null;
+                    conf.is_login = false;
+                    helper.setItem('is_login',false);
+                    helper.setItem('user_data',null);
+                    Backbone.history.navigate('my',{trigger:true,replace:false});
+
+
+                }else{
+                    alert(res.msg);
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+            
         },
         actBack: function() {
             history.go(-1);

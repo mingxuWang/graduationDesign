@@ -48,6 +48,7 @@ define(['backbone', 'template', 'my/tpls', 'ui/helper/helper'], function(Backbon
         },
         actSignOut: function() {
             helper.setItem('is_login',false);
+            helper.setItem('user_data',null);
             conf.is_login=false;
             Backbone.history.navigate('index', { trigger: true, replace: false });
         },

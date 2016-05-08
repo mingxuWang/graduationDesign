@@ -5,7 +5,7 @@ define(['backbone','ui/nav/tpl','ui/router/router'],function(Backbone,tpl,app){
           'click .nav-item': 'actionSwitch',
         },
         initialize: function (option) {
-            console.log(option);
+            // console.log(option);
             this.render();
         },
         render: function () {
@@ -23,7 +23,7 @@ define(['backbone','ui/nav/tpl','ui/router/router'],function(Backbone,tpl,app){
             //var that = this;
             var nav = $(e.currentTarget).data('nav');
             this.$el.find('.nav-item').removeClass('active').filter('.nav-'+nav).addClass('active');
-            console.log(nav);
+            // console.log(nav);
             if(nav){
                 Backbone.history.navigate(nav, {trigger: true, replace: true});
             }
