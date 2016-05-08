@@ -33,7 +33,7 @@ define(function() {
         list: [
             '<table class="info-table table table-bordered table-hover col-md-12">',
                 '<thead>',
-                    '<td>序号</td><td>题目</td><td>日期</td><td>发布人</td><td>摘要</td>',
+                    '<td>序号</td><td>题目</td><td>日期</td><td>发布人</td>',
                 '</thead>',
                 '{{each list as item index}}',
                     '<tr>',
@@ -41,7 +41,6 @@ define(function() {
                         '<td>{{item.title}}</td>',
                         '<td>{{item.date}}</td>',
                         '<td>{{item.author}}</td>',
-                        '<td class="summary">{{item.summary}}</td>',
                     '</tr>',
                 '{{/each}}',
             '</table>',
@@ -81,7 +80,7 @@ define(function() {
                 '<div class="form-group art-container">',
                     '<label for="art-content" class="col-sm-2 control-label">正文</label>',
                     '<div class="col-sm-10">',
-                      '<textarea name="art-content" id="content" class="form-control summary" rows="5">',
+                      '<textarea name="art-content" id="art-content" class="form-control artical-item" rows="5">',
                       '</textarea>',
                     '</div>',
                 '</div>',
@@ -90,7 +89,7 @@ define(function() {
         ].join(''),
         add_para:[
             '<div class="col-sm-10 col-sm-offset-2 add-content">',
-              '<textarea name="art-content" id="content" class="form-control summary" rows="5">',
+              '<textarea name="art-content" class="form-control artical-item" rows="5">',
               '</textarea>',
             '</div>'
         ].join("")

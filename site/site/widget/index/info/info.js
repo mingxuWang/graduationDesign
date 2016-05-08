@@ -13,17 +13,42 @@ define(['backbone', 'template', 'index/info/tpls'], function(Backbone, T, tpls) 
     	]
     }
     var Model = Backbone.Model.extend({
-        //url:'',
         defaults: function() {
             return {
                 id: null,
-                title: null,
-                date: null,
-                content: null
+                info:null
             }
         },
-        getList: function() {
+        initialize: function(querys){
             var that = this;
+            that.set('id',querys.id);
+            console.log(querys.id);
+        },
+        getInfo: function() {
+            var that = this;
+            $.ajax({
+                url: '/artInfo',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id:that.get('id')
+                }
+            })
+            .done(function(res) {
+                if(res.ret ===1){
+                    that.set('info',res.info);
+                }else{
+                    alert(res.msg);
+                    Backbone.history.navigate('/index',{trigger:true,replace:false});
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+            
 
         }
     });
@@ -35,11 +60,12 @@ define(['backbone', 'template', 'index/info/tpls'], function(Backbone, T, tpls) 
         	'click .act-back': 'actBack'
         },
         initialize: function(options) {
-            this.model = new Model();
+            var querys = options.querys;
+            this.model = new Model(querys);
             this.renderSkeleton();
             this.renderHeader();
-            this.renderPara();
-            this.model.getList();
+            this.listenTo(this.model,'change:info',this.renderPara);
+            this.model.getInfo();
         },
         renderSkeleton: function() {
             this.$el.html(T.compile(tpls.skeleton));
@@ -50,7 +76,8 @@ define(['backbone', 'template', 'index/info/tpls'], function(Backbone, T, tpls) 
             this.$el.find('.main .header').html(T.compile(tpls.header)({ title: '推荐文章' }));
         },
         renderPara: function(){
-        	this.$el.find('.main .content').html(T.compile(tpls.content)({item:item}));
+            var that = this;
+        	this.$el.find('.main .content').html(T.compile(tpls.content)({item:that.model.get('info')}));
         },
         actBack: function() {
         	history.go(-1);

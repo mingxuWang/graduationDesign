@@ -18,53 +18,6 @@ app.configure(function() {
 });
 
 // 前端接口
-app.get('/index/list', function(req, res) {
-    var testArr = [{
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'static/imgs/1.jpeg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'static/imgs/2.jpeg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'static/imgs/3.jpeg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'static/imgs/4.jpeg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'static/imgs/5.jpeg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'static/imgs/6.jpeg'
-    }, {
-        id: '123',
-        title: '我是一个测试数据',
-        date: '5月3日',
-        summary: '我只是一段用来测试的话我只是一段用来测试的话我段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话我只是一段用来测试的话',
-        src: 'static/imgs/example.jpg'
-    }];
-    res.send(testArr);
-});
-
 app.get('/chatting/list', function(req, res) {
     var testArr = [{
         id: '123',
@@ -148,16 +101,7 @@ app.post('/account/login', function(req, res) {
 
 app.post('/account/register', function(req, res) {
 
-    var user = {
-        username: req.body.username,
-        password: req.body.password,
-        name: req.body.name,
-        gender: req.body.gender,
-        birth_year: req.body.birth_year,
-        phone: req.body.phone,
-        hobbies: req.body.hobbies,
-        disease: req.body.disease
-    };
+    var user = req.body;
     Account.findOne({username:req.body.username},function(err,doc){
         if(doc != null){
             var resp = {
@@ -226,6 +170,64 @@ app.get('/userInfo',function(req,res){
             }
         }
     });
+});
+
+// 文章相关接口
+app.post('/publish',function(req,res){
+    var art = req.body;
+    Artical.findOne({title:art.title},function(err,doc){
+        if(doc != null){
+            var resp = {
+                ret :0,
+                msg : '已存在同名文章~'
+            }
+            console.log('发布了同名文章');
+            res.send(resp);
+        }else{
+            publish(art);
+            var resp = {
+                ret :1,
+                msg : '发布成功！'
+            }
+            res.send(resp);
+        }
+    })
+});
+
+app.get('/artical',function(req,res){
+    Artical.find({},{artical:0},function(err,doc){
+        if(doc.toString() != ''){
+            var resp = {
+                ret :1,
+                list : doc
+            };
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'暂无数据！'
+            };
+            res.send(resp);
+        }
+    });
+});
+
+app.post('/artInfo',function(req,res){
+    Artical.findOne({_id:req.body.id},function(err,doc){
+        if(doc != null){
+            var resp = {
+                ret :1,
+                info : doc
+            };
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'文章错误！'
+            };
+            res.send(resp);
+        }
+    });
 })
 
 
@@ -264,8 +266,6 @@ db.once('open', function() {
 });
 
 var register = function(userInfo) {
-    var shaSum = crypto.createHash('sha256');
-    shaSum.update(userInfo.password);
     var user = new Account({
         username: userInfo.username,
         password: userInfo.password,
@@ -278,12 +278,14 @@ var register = function(userInfo) {
     });
     user.save(registerCallback);
 };
+
 var registerCallback = function(err) {
     if (err) {
         return console.log(err);
     }
     return console.log('Account was created');
 };
+
 var checkAccount = function(userInfo) {
     Account.find({ username: userInfo.username, password: userInfo.password }, function(err, doc) {
         if (doc != null) {
@@ -291,7 +293,24 @@ var checkAccount = function(userInfo) {
         }
 
     });
+};
 
+var publish = function(artical){
+    var art = new Artical({
+        title: artical.title,
+        date: artical.date,
+        author:artical.author,
+        summary: artical.summary,
+        artical:artical.artical,
+        img_src:artical.img_src
+    })
+    art.save(publishCallback);
+};
+var publishCallback = function(err) {
+    if (err) {
+        return console.log(err);
+    }
+    return console.log('Artical was created');
 };
 
 

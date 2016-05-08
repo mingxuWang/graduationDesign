@@ -19,8 +19,8 @@ define(function(){
         		'<span class="key date">{{item.date}}</span>',
         	'</div>',
         	'<div class="artical">',
-        	'{{each item.para as para index}}',
-        	'<p class="paragraph">{{para}}</p>',
+        	'{{each item.artical as item index}}',
+        	'<p class="paragraph">{{item}}</p>',
         	'{{/each}}',
         	'</div>'
         	

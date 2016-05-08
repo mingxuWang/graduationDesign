@@ -30,6 +30,31 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
         }
     ];
     
+    var Model = Backbone.Model.extend({
+        defaults:{
+            list:null
+        },
+        getList: function(){
+            var that = this;
+            $.ajax({
+                url: '/artical',
+                type: 'GET',
+                dataType: 'JSON'
+            })
+            .done(function(res) {
+                if(res.ret ===1){
+                    that.set('list',res.list);
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+            
+        }
+    })
     var index_view = Backbone.View.extend({
     tagName: 'div',
     model: null,
@@ -41,14 +66,16 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
         'click .btn-publish': 'actPublishArtical'
     },
     initialize: function() {
+        this.model = new Model();
         this.render();
+        this.listenTo(this.model,'change:list',this.renderList);
+        this.model.getList();
     },
     render: function() {
         this.renderSkeleton();
         this.renderHeader();
         this.renderNav();
         this.renderCrumb();
-        this.renderList();
     },
     renderSkeleton: function() {
         this.$el.html(T.compile(tpls.skeleton));
@@ -66,7 +93,8 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
         this.$el.find('.crumb').removeClass('active').filter('.crumb-list').addClass('active');
     },
     renderList: function() {
-        this.$el.find('.main .container .content').html(T.compile(tpls.list));
+        var that = this;
+        this.$el.find('.main .container .content').html(T.compile(tpls.list)({list:that.model.get('list')}));
     },
     renderPublish:function(){
         var date = new Date();
@@ -96,13 +124,48 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
     },
     actAddParagraph:function(){
         this.$el.find('.main .container .content .art-container').append(T.compile(tpls.add_para));
-    }
+    },
     actPublishArtical: function(){
-        var title = $('#title').val();
-        var author = $('#author').val();
-        var date = $('#date').val();
-        var img_src = $('#img-src').val();
-        var summary = $('#summary').val();
+        var that = this;
+        var artical = that.getArtical();
+        $.ajax({
+            url: '/publish',
+            type: 'POST',
+            dataType: 'JSON',
+            data: artical,
+        })
+        .done(function(res) {
+            if(res.ret ===1){
+                alert(res.msg);
+                var href = location.href;
+                that.initialize();
+            }else{
+                alert(res.msg);
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+    },
+    getArtical: function(){
+        var artical = [];
+        var len = $('.artical-item').length;
+        for(var i = 0 ; i < len;i++){
+            artical.push($($('.artical-item')[i]).val());
+        }
+        var art = {
+            title: $('#title').val(),
+            author: $('#author').val(),
+            date: $('#date').val(),
+            img_src: $('#img-src').val(),
+            summary: $('#summary').val(),
+            artical:artical
+        }
+        return art;
     }
 });
 return index_view;

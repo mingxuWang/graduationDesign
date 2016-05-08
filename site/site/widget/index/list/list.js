@@ -2,38 +2,33 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
     var $canvas = $(document.body).find('#canvas');
 
     
-    var index_model = Backbone.Model.extend({
-        url:'/index/list',
+    var Model = Backbone.Model.extend({
         defaults: function() {
             return {
-                header: null,
-                banner: null,
-                list: null
+                list:null
             }
         },
         getList: function() {
             var that = this;
-            that.fetch({
-                dataType: "json",
-                // data: keys,
-                timeout: 20000,
-                cache: false,
-                success: function (_, response) {
-                    if (response) {
-                        //TODO 单线请求,可以这样;但是多线请求,可能就会出问题了
-                        that.set({list: response});
-                    } else {
-                        Alert.show(response.msg);
-                    }
-                },
-                error: function (_, errorMsg) {
-                    if (errorMsg === "timeout") {
-                        Alert.show("网络请求超时!");
-                    } else {
-                        Alert.show("您的网络似乎有问题, 请检查网络后重试!");
-                    }
+            $.ajax({
+                url: '/artical',
+                type: 'GET',
+                dataType: 'json'
+            })
+            .done(function(res) {
+                if(res.ret ===1){
+                    that.set('list',res.list);
+                }else{
+                    alert(res.msg);
                 }
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                // console.log("complete");
             });
+            
 
         }
     });
@@ -45,7 +40,7 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
             'click .list-item': 'actInfo'
         },
         initialize: function() {
-            this.model = new index_model();
+            this.model = new Model();
             this.renderSkeleton();
             this.renderHeader();
             this.listenTo(this.model, 'change:list', this.renderList);
