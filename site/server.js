@@ -17,6 +17,7 @@ app.configure(function() {
     app.use(express.errorHandler({ dumpException: true, showStack: true }));
 });
 
+// 前端接口
 app.get('/index/list', function(req, res) {
     var testArr = [{
         id: '123',
@@ -103,7 +104,7 @@ app.post('/account/admin/login',function(req,res){
         username: req.body.username,
         password: req.body.password
     };
-    AdminAccount.findOne({username:user.username,password:user.password},function(err,doc){
+    AdminAccount.findOne({username:user.username,password:user.password},{name:1},function(err,doc){
         if (doc != null) {
             var resp = {
                 ret :1,
@@ -205,8 +206,27 @@ app.post('/account/changePassword',function(req,res){
             res.send(resp);
         }
     });
-})
+});
 
+
+// 后台接口
+
+app.get('/userInfo',function(req,res){
+    Account.find({},{password:0},function(err,doc){
+        if(doc != []){
+            var resp = {
+                ret :1,
+                info : doc
+            }
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'暂无数据！'
+            }
+        }
+    });
+})
 
 
 // 数据库连接相关
@@ -230,8 +250,17 @@ db.once('open', function() {
         password: { type: String },
         name: { type: String }
     });
+    ArticalSchema = new mongoose.Schema({
+        title: { type: String},
+        date: { type: String },
+        author:{ type: String },
+        summary: { type: String },
+        artical:{type:[]},
+        img_src:{type:String}
+    });
     Account = db.model('Account', AccountSchema);
     AdminAccount = db.model('AdminAccount',AdminAccountSchema);
+    Artical = db.model('Artical',ArticalSchema);
 });
 
 var register = function(userInfo) {

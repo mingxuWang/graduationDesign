@@ -1,0 +1,41 @@
+.back-index .main .header {
+  text-align: center;
+  color: #01bc8f;
+}
+.back-index .main .header h1 {
+  font-size: 40px;
+  margin: 20px 0;
+  height: 50px;
+  line-height: 50px;
+}
+.back-index .main .header div {
+  font-size: 20px;
+  height: 90px;
+  line-height: 90px;
+}
+.back-index .main .header div .admin-name {
+  color: black;
+  font-weight: bold;
+}
+.back-index .main .header div .sign-out {
+  margin-left: 15px;
+  background-color: #01bc8f;
+  color: white;
+  border-radius: 3px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.back-index .main .container {
+  margin-top: 30px;
+}
+.back-index .main .container .breadcrumb .active {
+  font-weight: bold;
+}
+.back-index .main .container .content {
+  margin-top: 80px;
+  text-align: center;
+  font-size: 40px;
+}
+.back-index .main .container .content span {
+  color: #01bc8f;
+}

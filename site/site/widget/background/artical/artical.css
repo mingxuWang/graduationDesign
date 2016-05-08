@@ -1,0 +1,59 @@
+.back-artical .main .header {
+  text-align: center;
+  color: #01bc8f;
+}
+.back-artical .main .header h1 {
+  font-size: 40px;
+  margin: 20px 0;
+  height: 50px;
+  line-height: 50px;
+}
+.back-artical .main .header div {
+  font-size: 20px;
+  height: 90px;
+  line-height: 90px;
+}
+.back-artical .main .header div .admin-name {
+  color: black;
+  font-weight: bold;
+}
+.back-artical .main .header div .sign-out {
+  margin-left: 15px;
+  background-color: #01bc8f;
+  color: white;
+  border-radius: 3px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.back-artical .main .container {
+  margin-top: 30px;
+}
+.back-artical .main .container .content .info-table {
+  font-size: 16px;
+  text-align: center;
+}
+.back-artical .main .container .main-content .breadcrumb .active {
+  font-weight: bold;
+}
+.back-artical .main .container .main-content .publish-form {
+  text-align: center;
+}
+.back-artical .main .container .main-content .publish-form .btn-publish {
+  background-color: #01bc8f;
+  color: white;
+  margin-bottom: 20px;
+}
+.back-artical .main .container .main-content .publish-form input {
+  text-align: center;
+}
+.back-artical .main .container .main-content .publish-form textarea {
+  resize: none;
+}
+.back-artical .main .container .main-content .publish-form .add-content {
+  margin-top: 15px;
+}
+.back-artical .main .container .main-content .publish-form .btn-add {
+  background-color: #01bc8f;
+  color: white;
+  margin-bottom: 50px;
+}

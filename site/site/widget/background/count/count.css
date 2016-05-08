@@ -1,0 +1,37 @@
+.back-count .main .header {
+  text-align: center;
+  color: #01bc8f;
+}
+.back-count .main .header h1 {
+  font-size: 40px;
+  margin: 20px 0;
+  height: 50px;
+  line-height: 50px;
+}
+.back-count .main .header div {
+  font-size: 20px;
+  height: 90px;
+  line-height: 90px;
+}
+.back-count .main .header div .admin-name {
+  color: black;
+  font-weight: bold;
+}
+.back-count .main .header div .sign-out {
+  margin-left: 15px;
+  background-color: #01bc8f;
+  color: white;
+  border-radius: 3px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.back-count .main .container {
+  margin-top: 30px;
+}
+.back-count .main .container .breadcrumb .active {
+  font-weight: bold;
+}
+.back-count .main .container .content .info-table {
+  font-size: 16px;
+  text-align: center;
+}

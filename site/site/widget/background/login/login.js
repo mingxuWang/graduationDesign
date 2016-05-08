@@ -41,16 +41,18 @@ define(['backbone', 'template', 'background/login/tpls','ui/helper/helper'], fun
             })
             .done(function(res) {
                 if(res.ret ===1){
-                    alert('存在用户！')
+                    conf.admin_is_login = true;
+                    conf.admin_data = res.userInfo;
+                    helper.setItem('admin_is_login',true);
+                    helper.setItem('admin_data',res.userInfo);
+                    Backbone.history.navigate('index',{trigger:true,replace:false});
                 }else{
                     alert(res.msg)
                 }
             })
             .fail(function() {
-                console.log("error");
             })
             .always(function() {
-                console.log("complete");
             });
             
 

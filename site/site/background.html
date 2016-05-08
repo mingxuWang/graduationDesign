@@ -7,6 +7,15 @@
 	<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="./static/css/normalize.css">
 	<link rel="stylesheet" href="./widget/background/login/login.css">
+	<link rel="stylesheet" href="./widget/background/index/index.css">
+	<link rel="stylesheet" href="./widget/background/count/count.css">
+	<link rel="stylesheet" href="./widget/background/artical/artical.css">
+	<link rel="stylesheet" href="./widget/background/push/push.css">
+	<script>
+	window.conf = {};
+	conf.admin_is_login = JSON.parse(localStorage.getItem('admin_is_login')) || false;
+	conf.admin_data = JSON.parse(localStorage.getItem('admin_data')) || {};
+	</script>
 </head>
 <body>
 	<div id="canvas" class="container"></div>

@@ -1,9 +1,11 @@
 define(['backbone','ui/helper/helper'],function(Backbone,mainNav,helper){
 	var App = Backbone.Router.extend({
 		routes: {
-			//'' : 'actIndex',
 			'index': 'pageIndex',
 			'login': 'pageLogin',
+			'count': 'pageCount',
+			'artical': 'pageArtical',
+			'push': 'pagePush',
 			'*action' : 'pageLogin',
 		},
 		currentView: null,
@@ -12,7 +14,6 @@ define(['backbone','ui/helper/helper'],function(Backbone,mainNav,helper){
 			
 		},
 		clean: function () {
-			// console.log(this.currentView);
 			if (this.currentView) {
 				if(this.currentView.close) {
 					this.currentView.close();
@@ -40,7 +41,31 @@ define(['backbone','ui/helper/helper'],function(Backbone,mainNav,helper){
 		pageIndex: function(queryString){
 			var that =this;
 			// var querys = that.getQuerys(queryString);
-			require(['index/list/list'],function(view){
+			require(['background/index/index'],function(view){
+				that.clean();
+				that.currentView = new view();
+			});
+		},
+		pageCount: function(queryString){
+			var that =this;
+			// var querys = that.getQuerys(queryString);
+			require(['background/count/count'],function(view){
+				that.clean();
+				that.currentView = new view();
+			});
+		},
+		pageArtical: function(queryString){
+			var that =this;
+			// var querys = that.getQuerys(queryString);
+			require(['background/artical/artical'],function(view){
+				that.clean();
+				that.currentView = new view();
+			});
+		},
+		pagePush: function(queryString){
+			var that =this;
+			// var querys = that.getQuerys(queryString);
+			require(['background/push/push'],function(view){
 				that.clean();
 				that.currentView = new view();
 			});
