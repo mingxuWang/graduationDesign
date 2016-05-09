@@ -1,4 +1,4 @@
-define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], function(Backbone, T, tpls,helper) {
+define(['backbone', 'template', 'background/activity/tpls','ui/helper/helper'], function(Backbone, T, tpls,helper) {
     var $canvas = $(document.body).find('#canvas');
     var nav_list = [
         {
@@ -22,14 +22,35 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
     var crumb_list = [
         {
             role: 'list',
-            name:'文章列表'
+            name:'活动列表'
         },
         {
             role: 'publish',
-            name:'文章发布'
+            name:'活动发布'
         }
     ];
-    
+    var activity_key = [
+        {
+            role:'book',
+            show:'读书分享'
+        },
+        {
+            role:'dance',
+            show:'广场舞'
+        },
+        {
+            role:'fishing',
+            show:'垂钓'
+        },
+        {
+            role:'climb',
+            show:'登山'
+        },
+        {
+            role:'happy',
+            show:'娱乐'
+        }
+    ];
     var Model = Backbone.Model.extend({
         defaults:{
             list:null
@@ -37,7 +58,7 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
         getList: function(){
             var that = this;
             $.ajax({
-                url: '/artical',
+                url: '/activity',
                 type: 'GET',
                 dataType: 'JSON'
             })
@@ -58,16 +79,15 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
     var index_view = Backbone.View.extend({
     tagName: 'div',
     model: null,
-    className: 'back-artical',
+    className: 'back-push',
     events: {
         'click .sign-out': 'actSignout',
         'click .crumb': 'actCrumb',
-        'click .btn-add': 'actAddParagraph',
-        'click .btn-publish': 'actPublishArtical',
-        'click .check-btn': 'actShowDetail',
-        'click .btn-back':'actBack',
-        'click .btn-delete':'actDelete',
-        'click .btn-update': 'actUpdate'
+        'click .btn-publish': 'actPublishTips',
+        'click .check-btn':'actShowDetail',
+        'click .btn-back': 'actBack',
+        'click .btn-update': 'actUpdate',
+        'click .btn-delete': 'actDelete'
     },
     initialize: function() {
         this.model = new Model();
@@ -107,7 +127,7 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
             user:conf.admin_data.name,
             date: time
         }
-        this.$el.find('.main .container .content').html(T.compile(tpls.publish)({item:item}));
+        this.$el.find('.main .container .content').html(T.compile(tpls.publish)({item:item,list:activity_key}));
     },
     actSignout: function() {
         conf.admin_is_login = false;
@@ -126,22 +146,18 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
             that.renderPublish();
         }
     },
-    actAddParagraph:function(){
-        this.$el.find('.main .container .content .art-container').append(T.compile(tpls.add_para));
-    },
-    actPublishArtical: function(){
+    actPublishTips: function(){
         var that = this;
-        var artical = that.getArtical();
+        var act = that.getActivity();
         $.ajax({
-            url: '/publish/artical',
+            url: '/publish/activity',
             type: 'POST',
             dataType: 'JSON',
-            data: artical,
+            data: act,
         })
         .done(function(res) {
             if(res.ret ===1){
                 alert(res.msg);
-                var href = location.href;
                 that.initialize();
             }else{
                 alert(res.msg);
@@ -156,59 +172,38 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
         
     },
     actShowDetail:function(e){
+        var id = $(e.currentTarget).data("id");
         var that = this;
-        var id = $(e.currentTarget).data('id');
         $.ajax({
-            url: '/artInfo',
+            url: '/activity/info',
             type: 'POST',
             dataType: 'json',
-            data: {
-                id:id
-            }
+            data: {id:id},
         })
         .done(function(res) {
-            if(res.ret ===1){
+            if(res.ret ==1){
                 var item = res.info
-                that.$el.append(T.compile(tpls.detail)({item:item}));
+                that.$el.append(T.compile(tpls.detail)({item:item,list:activity_key}));
                 console.log(item);
-
-            }else{
-                alert(res.msg);
-                Backbone.history.navigate('/artical',{trigger:true,replace:false});
             }
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            // console.log("complete");
         });
+        
     },
     actBack:function(){
         $('.detail-panel').remove();
     },
-    actDelete:function(e){
-        var that = this;
-        var id = $(e.currentTarget).data('id');
-        $.ajax({
-            url: '/artInfo/delete',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id:id
-            }
-        })
-        .done(function(res) {
-            if(res.ret ===1){
-                alert(res.msg);
-                that.initialize();
-
-            }else{
-                alert(res.msg);
-                that.initialize();
-            }
-        });
-    },
     actUpdate:function(e){
         var that = this;
-        var art = that.getArtical();
+        var art = that.getActivity();
          art.id = $(e.currentTarget).data('id');
         $.ajax({
-            url: '/artInfo/update',
+            url: '/activity/update',
             type: 'POST',
             dataType: 'json',
             data: art
@@ -224,21 +219,44 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
             }
         });
     },
-    getArtical: function(){
-        var artical = [];
-        var len = $('.artical-item').length;
-        for(var i = 0 ; i < len;i++){
-            artical.push($($('.artical-item')[i]).val());
+    actDelete:function(e){
+        var that = this;
+        var id = $(e.currentTarget).data('id');
+        $.ajax({
+            url: '/activity/delete',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id:id
+            }
+        })
+        .done(function(res) {
+            if(res.ret ===1){
+                alert(res.msg);
+                that.initialize();
+
+            }else{
+                alert(res.msg);
+                that.initialize();
+            }
+        });
+    },
+    getActivity: function(){
+        var show = 0;
+        if($('input[name=show]:checked').length != 0){
+            show = 1;
         }
-        var art = {
+        var act = {
             title: $('#title').val(),
             author: $('#author').val(),
             date: $('#date').val(),
-            img_src: $('#img-src').val(),
-            summary: $('#summary').val(),
-            artical:artical
+            type:$('input[name=activity]:checked').val(),
+            summary:$('#summary').val(),
+            site:$('#site').val(),
+            show : show
         }
-        return art;
+        console.log(act);
+        return act;
     }
 });
 return index_view;

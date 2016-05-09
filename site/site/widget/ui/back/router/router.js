@@ -5,7 +5,7 @@ define(['backbone','ui/helper/helper'],function(Backbone,mainNav,helper){
 			'login': 'pageLogin',
 			'count': 'pageCount',
 			'artical': 'pageArtical',
-			'push': 'pagePush',
+			'activity': 'pageActivity',
 			'*action' : 'pageLogin',
 		},
 		currentView: null,
@@ -62,10 +62,10 @@ define(['backbone','ui/helper/helper'],function(Backbone,mainNav,helper){
 				that.currentView = new view();
 			});
 		},
-		pagePush: function(queryString){
+		pageActivity: function(queryString){
 			var that =this;
 			// var querys = that.getQuerys(queryString);
-			require(['background/push/push'],function(view){
+			require(['background/activity/activity'],function(view){
 				that.clean();
 				that.currentView = new view();
 			});

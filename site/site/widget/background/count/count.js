@@ -14,8 +14,8 @@ define(['backbone', 'template', 'background/count/tpls','ui/helper/helper'], fun
             name:'文章发布'
         },
         {
-            role: 'push',
-            name:'消息推送'
+            role: 'activity',
+            name:'活动发布'
         }
     ];
 

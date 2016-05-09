@@ -1,3 +1,43 @@
+.back-artical .detail-panel {
+  position: fixed;
+  z-index: 999;
+  background-color: white;
+  border: 1px solid gray;
+  width: 1300px;
+  height: 600px;
+  padding: 40px 80px 50px 0;
+  top: 50%;
+  left: 50%;
+  margin-left: -650px;
+  margin-top: -300px;
+  overflow-y: scroll;
+}
+.back-artical .detail-panel .publish-form {
+  text-align: center;
+}
+.back-artical .detail-panel .publish-form .btn {
+  margin-right: 30px;
+  background-color: #01bc8f;
+  color: white;
+  margin-bottom: 20px;
+}
+.back-artical .detail-panel .publish-form input {
+  text-align: center;
+}
+.back-artical .detail-panel .publish-form textarea {
+  resize: none;
+}
+.back-artical .detail-panel .publish-form .add-content {
+  margin-top: 15px;
+}
+.back-artical .detail-panel .publish-form .btn-add {
+  background-color: #01bc8f;
+  color: white;
+  margin-bottom: 50px;
+}
+.back-artical .detail-panel .publish-form .artical-item {
+  margin-bottom: 10px;
+}
 .back-artical .main .header {
   text-align: center;
   color: #01bc8f;
@@ -31,6 +71,13 @@
 .back-artical .main .container .content .info-table {
   font-size: 16px;
   text-align: center;
+}
+.back-artical .main .container .content .info-table .check-btn {
+  background-color: #01bc8f;
+  color: white;
+  cursor: pointer;
+  width: 90px;
+  margin: 20px;
 }
 .back-artical .main .container .main-content .breadcrumb .active {
   font-weight: bold;

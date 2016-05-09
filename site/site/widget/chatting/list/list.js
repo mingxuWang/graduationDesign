@@ -3,11 +3,9 @@ define(['backbone', 'template', 'chatting/list/tpls'], function(Backbone, T, tpl
 
     
     var index_model = Backbone.Model.extend({
-        url:'/chatting/list',
+        url:'/activity/show',
         defaults: function() {
             return {
-                header: null,
-                banner: null,
                 list: null
             }
         },
@@ -21,9 +19,9 @@ define(['backbone', 'template', 'chatting/list/tpls'], function(Backbone, T, tpl
                 success: function (_, response) {
                     if (response) {
                         //TODO 单线请求,可以这样;但是多线请求,可能就会出问题了
-                        that.set({list: response});
+                        that.set({list: response.list});
                     } else {
-                        Alert.show(response.msg);
+                        alert(response.msg);
                     }
                 },
                 error: function (_, errorMsg) {
@@ -42,7 +40,7 @@ define(['backbone', 'template', 'chatting/list/tpls'], function(Backbone, T, tpl
         model: null,
         className: 'chatting-list',
         events: {
-            'click .list-item': 'actRoom'
+            // 'click .list-item': 'actRoom'
         },
         initialize: function() {
             this.model = new index_model();
@@ -57,7 +55,7 @@ define(['backbone', 'template', 'chatting/list/tpls'], function(Backbone, T, tpl
 
         },
         renderHeader: function() {
-            this.$el.find('.main .header').html(T.compile(tpls.header)({ title: '老年会客室' }));
+            this.$el.find('.main .header').html(T.compile(tpls.header)({ title: '老年活动室' }));
         },
         renderBanner: function() {
 

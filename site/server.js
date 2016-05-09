@@ -3,7 +3,7 @@ var application_root = __dirname,
     path = require('path'),
     mongoose = require('mongoose'),
     crypto = require('crypto');
-var AccountSchema, Account;
+var AccountSchema, Account,AdminAccount,AdminAccountSchema,ArticalSchema,Artical,ActivitySchema,Activity;
 
 var app = express();
 
@@ -18,38 +18,13 @@ app.configure(function() {
 });
 
 // 前端接口
-app.get('/chatting/list', function(req, res) {
-    var testArr = [{
-        id: '123',
-        title: '音乐享乐派',
-        date: '5月3日',
-        area: '北京市丰台区',
-        intro: '我们来聊聊音乐吧!',
-        src: 'static/imgs/4.jpeg'
-    }, {
-        id: '123',
-        title: '翻过高山',
-        date: '5月6日',
-        area: '北京市朝阳区',
-        intro: '周末去爬山吗!',
-        src: 'static/imgs/2.jpeg'
-    }, {
-        id: '123',
-        title: '舞出人生',
-        date: '5月3日',
-        area: '北京市西城区',
-        intro: '今儿晚上广场舞约吗!',
-        src: 'static/imgs/3.jpeg'
-    }, {
-        id: '123',
-        title: '钓鱼岛',
-        date: '5月3日',
-        area: '北京市海淀区',
-        intro: '听说颐和园后面有个野湖!',
-        src: 'static/imgs/6.jpeg'
-    }];
-    res.send(testArr);
-});
+
+/**
+ * 后台管理与用户登录相关验证接口
+ * @param  {[type]} req    [description]
+ * @param  {[type]} res){                 var user [description]
+ * @return {[type]}        [description]
+ */
 app.post('/account/admin/login',function(req,res){
     var user = req.body.username;
     var pwd = req.body.password;
@@ -99,6 +74,13 @@ app.post('/account/login', function(req, res) {
 
 });
 
+/**
+ * 注册接口
+ * @param  {[type]} req                 [description]
+ * @param  {[type]} res)                {               var user [description]
+ * @param  {[type]} function(err,doc){                                         if(doc ! [description]
+ * @return {[type]}                     [description]
+ */
 app.post('/account/register', function(req, res) {
 
     var user = req.body;
@@ -121,6 +103,18 @@ app.post('/account/register', function(req, res) {
     
 });
 
+
+/**
+ * 修改密码接口
+ * @param  {[type]} req                               [description]
+ * @param  {[type]} res){                                            var old_pwd [description]
+ * @param  {[type]} options._id:1                     [description]
+ * @param  {[type]} function(err,doc){                                                          if(doc ! [description]
+ * @param  {[type]} options.$set:{password:new_pwd} [description]
+ * @param  {[type]} options.upsert:false              [description]
+ * @param  {Object} function(err){                                                                                          if(err){                    var resp [description]
+ * @return {[type]}                                   [description]
+ */
 app.post('/account/changePassword',function(req,res){
     var old_pwd = req.body.old_pwd;
     var new_pwd = req.body.new_pwd;
@@ -155,6 +149,14 @@ app.post('/account/changePassword',function(req,res){
 
 // 后台接口
 
+/**
+ * 用户信息获取接口
+ * @param  {[type]} req                 [description]
+ * @param  {[type]} res){                              Account.find({} [description]
+ * @param  {[type]} options.password:0  [description]
+ * @param  {Array}  function(err,doc){                                                   if(doc ! [description]
+ * @return {[type]}                     [description]
+ */
 app.get('/userInfo',function(req,res){
     Account.find({},{password:0},function(err,doc){
         if(doc != []){
@@ -172,8 +174,14 @@ app.get('/userInfo',function(req,res){
     });
 });
 
-// 文章相关接口
-app.post('/publish',function(req,res){
+/**
+ * 文章相关接口
+ * @param  {[type]} req                 [description]
+ * @param  {[type]} res){                              var art [description]
+ * @param  {[type]} function(err,doc){                                        if(doc ! [description]
+ * @return {[type]}                     [description]
+ */
+app.post('/publish/artical',function(req,res){
     var art = req.body;
     Artical.findOne({title:art.title},function(err,doc){
         if(doc != null){
@@ -184,7 +192,7 @@ app.post('/publish',function(req,res){
             console.log('发布了同名文章');
             res.send(resp);
         }else{
-            publish(art);
+            publishArt(art);
             var resp = {
                 ret :1,
                 msg : '发布成功！'
@@ -228,10 +236,206 @@ app.post('/artInfo',function(req,res){
             res.send(resp);
         }
     });
-})
+});
+
+app.post('/artInfo/delete',function(req,res){
+    Artical.findOne({_id:req.body.id},function(err,doc){
+        if(doc != null){
+            Artical.remove({_id:req.body.id},function(err,doc){
+                if(!err){
+                    var resp = {
+                        ret :1,
+                        msg : '删除成功！'
+                    };
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :0,
+                        msg :'删除失败错误！'
+                    };
+                    res.send(resp);
+                }
+            })
+            
+        }else{
+            var resp = {
+                ret :0,
+                msg :'文章错误！'
+            };
+            res.send(resp);
+        }
+    });
+});
+
+app.post('/artInfo/update',function(req,res){
+    Artical.findById(req.body.id,function(err,art){
+        if(art != null){
+            art.title=req.body.title;
+            art.date=req.body.date;
+            art.author=req.body.author;
+            art.summary= req.body.summary;
+            art.artical=req.body.artical;
+            art.img_src=req.body.img_src;
+            art.save();
+            var resp = {
+                ret :1,
+                msg :'修改成功！'
+            };
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'文章错误！'
+            };
+            res.send(resp);
+        }
+    });
+});
 
 
-// 数据库连接相关
+/**
+ * 活动相关接口
+ * @param  {[type]} req                 [description]
+ * @param  {[type]} res){                              var act [description]
+ * @param  {[type]} function(err,doc){                                        if(doc ! [description]
+ * @return {[type]}                     [description]
+ */
+app.post('/publish/activity',function(req,res){
+    var act = req.body;
+    Activity.findOne({title:act.title},function(err,doc){
+        if(doc != null){
+            var resp = {
+                ret :0,
+                msg : '已存在同名活动~'
+            }
+            console.log('发布了同名活动');
+            res.send(resp);
+        }else{
+            publishAct(act);
+            var resp = {
+                ret :1,
+                msg : '发布成功！'
+            }
+            res.send(resp);
+        }
+    })
+});
+
+app.get('/activity',function(req,res){
+    Activity.find({},function(err,doc){
+        if(doc.toString() != ''){
+            var resp = {
+                ret :1,
+                list : doc
+            };
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'暂无数据！'
+            };
+            res.send(resp);
+        }
+    });
+});
+
+app.get('/activity/show',function(req,res){
+    Activity.find({show:1},function(err,doc){
+        if(doc.toString() != ''){
+            var resp = {
+                ret :1,
+                list : doc
+            };
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'暂无数据！'
+            };
+            res.send(resp);
+        }
+    });
+});
+
+app.post('/activity/info',function(req,res){
+    Activity.findOne({_id:req.body.id},function(err,doc){
+        if(doc != null){
+            var resp = {
+                ret :1,
+                info : doc
+            };
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'暂无数据！'
+            };
+            res.send(resp);
+        }
+    });
+});
+
+app.post('/activity/update',function(req,res){
+    Activity.findById(req.body.id,function(err,act){
+        if(act != null){
+            act.title=req.body.title;
+            act.date=req.body.date;
+            act.author=req.body.author;
+            act.summary= req.body.summary;
+            act.type= req.body.type;
+            act.site = req.body.site;
+            act.show = req.body.show;
+            act.save();
+            var resp = {
+                ret :1,
+                msg :'修改成功！'
+            };
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'活动错误！'
+            };
+            res.send(resp);
+        }
+    });
+});
+
+app.post('/activity/delete',function(req,res){
+    Activity.findOne({_id:req.body.id},function(err,doc){
+        if(doc != null){
+            Activity.remove({_id:req.body.id},function(err,doc){
+                if(!err){
+                    var resp = {
+                        ret :1,
+                        msg : '删除成功！'
+                    };
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :0,
+                        msg :'删除失败错误！'
+                    };
+                    res.send(resp);
+                }
+            })
+            
+        }else{
+            var resp = {
+                ret :0,
+                msg :'活动号错误！'
+            };
+            res.send(resp);
+        }
+    });
+});
+
+
+
+/**
+ * 数据库连接等相关
+ * @type {[type]}
+ */
 var db = mongoose.createConnection('localhost', 'laoyousuoyi');
 db.on('error', console.error.bind(console, '连接错误:'));
 db.once('open', function() {
@@ -260,6 +464,16 @@ db.once('open', function() {
         artical:{type:[]},
         img_src:{type:String}
     });
+    ActivitySchema = new mongoose.Schema({
+        title: { type: String},
+        date: { type: String },
+        author:{ type: String },
+        summary: { type: String },
+        type:{type:String},
+        site:{type:String},
+        show:{type:Number}
+    });
+    Activity = db.model('Activity', ActivitySchema);
     Account = db.model('Account', AccountSchema);
     AdminAccount = db.model('AdminAccount',AdminAccountSchema);
     Artical = db.model('Artical',ArticalSchema);
@@ -295,7 +509,7 @@ var checkAccount = function(userInfo) {
     });
 };
 
-var publish = function(artical){
+var publishArt = function(artical){
     var art = new Artical({
         title: artical.title,
         date: artical.date,
@@ -304,16 +518,40 @@ var publish = function(artical){
         artical:artical.artical,
         img_src:artical.img_src
     })
-    art.save(publishCallback);
+    art.save(publishArtCallback);
 };
-var publishCallback = function(err) {
+var publishArtCallback = function(err) {
     if (err) {
         return console.log(err);
     }
     return console.log('Artical was created');
 };
 
+var publishAct = function(activity){
+    var act = new Activity({
+        title: activity.title,
+        date: activity.date,
+        author:activity.author,
+        summary: activity.summary,
+        type:activity.type,
+        site:activity.site,
+        show:activity.show
+    })
+    act.save(publishActCallback);
+};
+var publishActCallback = function(err) {
+    if (err) {
+        return console.log(err);
+    }
+    return console.log('Activity was created');
+};
 
+
+
+/**
+ * 服务器启动
+ * @type {Number}
+ */
 var port = 4711;
 app.listen(port, function() {
     console.log("Express server listening on port %d in %s mode", port, app.settings.env);

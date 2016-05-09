@@ -1,8 +1,9 @@
-.back-artical {
+.back-push{
     .detail-panel{
         position: fixed;
         z-index: 999;
         background-color: white;
+        border-radius: 20px;
         border:1px solid gray;
         width:1300px;
         height:600px;
@@ -25,6 +26,12 @@
             }
             textarea{
                 resize:none;
+            }
+            .check-list{
+                padding:0 10px;
+                label{
+                    padding-right: 10px;
+                }
             }
             .add-content{
                 margin-top: 15px;
@@ -75,10 +82,10 @@
                     text-align: center;
                     .check-btn{
                         background-color: #01bc8f;
-                        color: white;
+                        color:white;
                         cursor:pointer;
                         width: 90px;
-                        margin:20px;
+                        // margin:20px;
                     }
                 }
             }
@@ -101,14 +108,15 @@
             		textarea{
             			resize:none;
             		}
-            		.add-content{
-            			margin-top: 15px;
-            		}
-            		.btn-add{
-            			background-color: #01bc8f;
-            			color:white;
-            			margin-bottom: 50px;
-            		}
+					.check-list{
+						padding:0 10px;
+						label{
+							padding-right: 10px;
+						}
+					}
+                    #show{
+                        margin-left: 20px;
+                    }
             	}
             }
         }

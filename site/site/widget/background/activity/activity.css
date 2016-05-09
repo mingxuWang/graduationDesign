@@ -1,0 +1,113 @@
+.back-push .detail-panel {
+  position: fixed;
+  z-index: 999;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid gray;
+  width: 1300px;
+  height: 600px;
+  padding: 40px 80px 50px 0;
+  top: 50%;
+  left: 50%;
+  margin-left: -650px;
+  margin-top: -300px;
+  overflow-y: scroll;
+}
+.back-push .detail-panel .publish-form {
+  text-align: center;
+}
+.back-push .detail-panel .publish-form .btn {
+  margin-right: 30px;
+  background-color: #01bc8f;
+  color: white;
+  margin-bottom: 20px;
+}
+.back-push .detail-panel .publish-form input {
+  text-align: center;
+}
+.back-push .detail-panel .publish-form textarea {
+  resize: none;
+}
+.back-push .detail-panel .publish-form .check-list {
+  padding: 0 10px;
+}
+.back-push .detail-panel .publish-form .check-list label {
+  padding-right: 10px;
+}
+.back-push .detail-panel .publish-form .add-content {
+  margin-top: 15px;
+}
+.back-push .detail-panel .publish-form .btn-add {
+  background-color: #01bc8f;
+  color: white;
+  margin-bottom: 50px;
+}
+.back-push .detail-panel .publish-form .artical-item {
+  margin-bottom: 10px;
+}
+.back-push .main .header {
+  text-align: center;
+  color: #01bc8f;
+}
+.back-push .main .header h1 {
+  font-size: 40px;
+  margin: 20px 0;
+  height: 50px;
+  line-height: 50px;
+}
+.back-push .main .header div {
+  font-size: 20px;
+  height: 90px;
+  line-height: 90px;
+}
+.back-push .main .header div .admin-name {
+  color: black;
+  font-weight: bold;
+}
+.back-push .main .header div .sign-out {
+  margin-left: 15px;
+  background-color: #01bc8f;
+  color: white;
+  border-radius: 3px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.back-push .main .container {
+  margin-top: 30px;
+}
+.back-push .main .container .content .info-table {
+  font-size: 16px;
+  text-align: center;
+}
+.back-push .main .container .content .info-table .check-btn {
+  background-color: #01bc8f;
+  color: white;
+  cursor: pointer;
+  width: 90px;
+}
+.back-push .main .container .main-content .breadcrumb .active {
+  font-weight: bold;
+}
+.back-push .main .container .main-content .publish-form {
+  text-align: center;
+}
+.back-push .main .container .main-content .publish-form .btn-publish {
+  background-color: #01bc8f;
+  color: white;
+  margin-bottom: 20px;
+}
+.back-push .main .container .main-content .publish-form input {
+  text-align: center;
+}
+.back-push .main .container .main-content .publish-form textarea {
+  resize: none;
+}
+.back-push .main .container .main-content .publish-form .check-list {
+  padding: 0 10px;
+}
+.back-push .main .container .main-content .publish-form .check-list label {
+  padding-right: 10px;
+}
+.back-push .main .container .main-content .publish-form #show {
+  margin-left: 20px;
+}

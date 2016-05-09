@@ -7,15 +7,15 @@
 }
 .chatting-list .main .list li {
   width: 10rem;
-  height: 3rem;
+  height: 4rem;
   margin: 0 auto;
   margin-top: 0.2rem;
   font-size: 0.16rem;
   background-color: white;
 }
 .chatting-list .main .list li img {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 3.6rem;
+  height: 3.6rem;
   margin-top: 0.2rem;
   margin-right: 0.2rem;
   margin-left: 0.2rem;
@@ -29,7 +29,6 @@
   font-weight: bold;
 }
 .chatting-list .main .list li .list-content .list-date {
-  padding-left: 0.3rem;
   font-size: 0.3rem;
 }
 .chatting-list .main .list li .list-area {

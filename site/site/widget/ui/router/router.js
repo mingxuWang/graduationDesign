@@ -152,7 +152,7 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 					hideMenu: true,
 					nav: 'index'
 				});
-				console.log(querys);
+				// console.log(querys);
 				that.currentView = new view({querys:querys});
 			});
 		},
