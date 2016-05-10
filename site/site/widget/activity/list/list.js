@@ -1,13 +1,11 @@
-define(['backbone', 'template', 'my/tips/tpls'], function(Backbone, T, tpls) {
+define(['backbone', 'template', 'activity/list/tpls'], function(Backbone, T, tpls) {
     var $canvas = $(document.body).find('#canvas');
 
 
     var index_model = Backbone.Model.extend({
-        url: '/index/list',
+        url: '/activity/show',
         defaults: function() {
             return {
-                header: null,
-                banner: null,
                 list: null
             }
         },
@@ -21,16 +19,16 @@ define(['backbone', 'template', 'my/tips/tpls'], function(Backbone, T, tpls) {
                 success: function(_, response) {
                     if (response) {
                         //TODO 单线请求,可以这样;但是多线请求,可能就会出问题了
-                        that.set({ list: response });
+                        that.set({ list: response.list });
                     } else {
-                        Alert.show(response.msg);
+                        alert(response.msg);
                     }
                 },
                 error: function(_, errorMsg) {
                     if (errorMsg === "timeout") {
-                        Alert.show("网络请求超时!");
+                        alert("网络请求超时!");
                     } else {
-                        Alert.show("您的网络似乎有问题, 请检查网络后重试!");
+                        alert("您的网络似乎有问题, 请检查网络后重试!");
                     }
                 }
             });
@@ -40,9 +38,9 @@ define(['backbone', 'template', 'my/tips/tpls'], function(Backbone, T, tpls) {
     var index_view = Backbone.View.extend({
         tagName: 'div',
         model: null,
-        className: 'tips',
+        className: 'chatting-list',
         events: {
-            'click .act-back': 'actBack'
+            'click .btn-add': 'actAdd'
         },
         initialize: function() {
             this.model = new index_model();
@@ -54,17 +52,23 @@ define(['backbone', 'template', 'my/tips/tpls'], function(Backbone, T, tpls) {
         renderSkeleton: function() {
             this.$el.html(T.compile(tpls.skeleton));
             $canvas.append(this.$el);
+
         },
         renderHeader: function() {
-            this.$el.find('.main .header').html(T.compile(tpls.header)({ title: '我的消息' }));
+            this.$el.find('.main .header').html(T.compile(tpls.header)({ title: '老年活动室', login: conf.is_login }));
+        },
+        renderBanner: function() {
+
         },
         renderList: function() {
             var that = this;
             var list = that.model.get('list');
-            this.$el.find('.main .list').html(T.compile(tpls.list)({ list: list }));
+            this.$el.find('.main .list').append(T.compile(tpls.list)({ list: list }));
         },
-        actBack: function() {
-            history.go(-1);
+        actAdd: function(e) {
+            Backbone.history.navigate('activity/add', { trigger: true, replace: false });
+
+
         }
     });
     return index_view;

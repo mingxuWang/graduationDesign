@@ -5,10 +5,10 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 			'index': 'pageIndex',
 			'index/info': 'pageInfo',
 			'search': 'pageSearch',
-			'chatting': 'pageChatting',
-			'chatting/room': 'pageChattingRoom',
+			'activity': 'pageActivity',
+			'activity/add': 'pageAddActivity',
 			'my':'pageMy',
-			'my/tips': 'pageTips',
+			'my/collection': 'pageCollection',
 			'my/changePassword': 'pageChangePwd',
 			'register': 'pageRegister',
 			'login': 'pageLogin',
@@ -82,24 +82,24 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 				that.currentView = new view({querys:querys});
 			});
 		},
-		pageChatting: function(queryString){
+		pageActivity: function(queryString){
 			var that =this;
 			var querys = that.getQuerys(queryString);
-			require(['chatting/list/list'],function(view){
+			require(['activity/list/list'],function(view){
 				that.clean({
 					hideMenu: false,
-					nav: 'chatting'
+					nav: 'activity'
 				});
 				that.currentView = new view({querys:querys});
 			});
 		},
-		pageChattingRoom: function(queryString){
+		pageAddActivity: function(queryString){
 			var that =this;
 			var querys = that.getQuerys(queryString);
-			require(['chatting/room/room'],function(view){
+			require(['activity/add/add'],function(view){
 				that.clean({
 					hideMenu: true,
-					nav: 'chatting'
+					nav: 'activity'
 				});
 				that.currentView = new view({querys:querys});
 			});
@@ -117,15 +117,14 @@ define(['backbone','ui/nav/nav','ui/helper/helper'],function(Backbone,mainNav,he
 					that.currentView = new view({querys:querys});
 				});
 			}else{
-				var redirectUrl = location.href;
-				that.navigate('/login?redirectUrl='+redirectUrl,{trigger:true,replace:false});
+				that.navigate('/login',{trigger:true,replace:false});
 			}
 
 		},
-		pageTips: function(queryString){
+		pageCollection: function(queryString){
 			var that =this;
 			var querys = that.getQuerys(queryString);
-			require(['my/tips/tips'],function(view){
+			require(['my/collection/collection'],function(view){
 				that.clean({
 					hideMenu: true,
 					nav: 'my'

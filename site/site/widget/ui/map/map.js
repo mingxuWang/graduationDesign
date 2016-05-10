@@ -6,7 +6,7 @@ define(['jquery'], function($) {
                 lng: '114.492231',
                 lat: '36.60124'
             };
-            if (options) {
+            if (options != null) {
                 opt = options;
                 mapshow = new AMap.Map('map', {
                     zoom: 17,
@@ -26,7 +26,7 @@ define(['jquery'], function($) {
                     cursor: 'move',
                     raiseOnDrag: true
                 });
-            } else {
+            }else{
                 opt = defaults;
                 mapshow = new AMap.Map('map', {
                     zoom: 12
@@ -38,13 +38,6 @@ define(['jquery'], function($) {
                     alert('成功获取该位置坐标，可以进行导航！');
                     $('.navigate').css('display', 'block');
                 });
-                // PC调试用的控件
-                // AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
-                //     function() {
-                //         mapshow.addControl(new AMap.ToolBar());
-                //         mapshow.addControl(new AMap.Scale());
-                //     });
-
                 marker = new AMap.Marker({
                     position: [opt.lng, opt.lat],
                     map: mapshow,

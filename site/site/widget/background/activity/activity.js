@@ -83,7 +83,7 @@ define(['backbone', 'template', 'background/activity/tpls','ui/helper/helper'], 
     events: {
         'click .sign-out': 'actSignout',
         'click .crumb': 'actCrumb',
-        'click .btn-publish': 'actPublishTips',
+        'click .btn-publish': 'actPublishActivity',
         'click .check-btn':'actShowDetail',
         'click .btn-back': 'actBack',
         'click .btn-update': 'actUpdate',
@@ -146,7 +146,7 @@ define(['backbone', 'template', 'background/activity/tpls','ui/helper/helper'], 
             that.renderPublish();
         }
     },
-    actPublishTips: function(){
+    actPublishActivity: function(){
         var that = this;
         var act = that.getActivity();
         $.ajax({

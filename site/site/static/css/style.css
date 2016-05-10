@@ -80,3 +80,25 @@ footer ul li.active p{
 #canvas{
 	margin-top:1.6rem;
 }
+
+
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #F2EFF9;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #F2EFF9;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #F2EFF9;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #F2EFF9;
+}
+

@@ -35,11 +35,14 @@
 }
 .index-info .content .artical {
   background-color: white;
+  padding-top: 0.6rem;
 }
 .index-info .content .artical .paragraph {
   margin: 0 auto;
   width: 10rem;
-  margin-bottom: 0.3rem;
+  padding-bottom: 0.4rem;
+  padding-top: 0.4rem;
   font-size: 0.6rem;
-  text-indent: 1.2rem;
+  line-height: 0.8rem;
+  color: #6D6F73;
 }

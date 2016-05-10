@@ -94,7 +94,7 @@ define(function() {
                 '<div class="form-group">',
                     '<label for="summary" class="col-sm-2 control-label">内容</label>',
                     '<div class="col-sm-10">',
-                      '<textarea name="summary" id="summary" class="form-control" rows="5">',
+                      '<textarea name="summary" id="summary" class="form-control">',
                       '</textarea>',
                     '</div>',
                 '</div>',

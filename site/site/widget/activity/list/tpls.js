@@ -9,7 +9,8 @@ define(function(){
             '</div>'
         ].join(''),
         'header': [
-                '<h1>{{title}}</h1>'
+                '<h1>{{title}}</h1>',
+                '{{if login == true}}<div class="btn-add">添加</div>{{/if}}'
         ].join(''),
         'list': [
             '{{each list as item index}}',

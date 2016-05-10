@@ -1,5 +1,5 @@
 define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geolocation'], function(Backbone, T, tpls, map, geo) {
-    var opt,pos;
+    var opt,pos,record,type,search;
 
     var $canvas = $(document.body).find('#canvas');
     var search_type=[
@@ -224,6 +224,7 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             'click .position': 'getPosition',
             'click .query': 'renderSearchPanel',
             'click .navigate':'renderNavigatePanel',
+            'click .collection':'addCollection',
             'click .close': 'actClose',
             'click .type-item': 'actShowSelection',
             'click .detail-item': 'actShowlevel',
@@ -233,13 +234,20 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             'click .show-hide':'actToggle',
             'click .navigate-type': 'actNavigate'
         },
-        initialize: function() {
+        initialize: function(options) {
+            var that = this;
             this.model = new index_model();
             this.render();
-            this.initMap();
+
+            if(options.querys.search != undefined){
+                this.initMap(options.querys);
+                that.searchAgain(options.querys);
+            }else{
+                this.initMap();
+            }
         },
-        initMap: function() {
-            map.init();
+        initMap: function(querys) {
+            map.init(querys);
             if ($('#map').data('exist')) {
                 var sumHei = window.screen.availHeight;
                 var headerHei = $('header').height();
@@ -340,7 +348,7 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
         },
         actSearch: function() {
             var that = this;
-            var type = key_type[$('input[name=type]:checked').val()];
+            type = key_type[$('input[name=type]:checked').data('type')];
             // console.log(type);
             if(type == '医院'){
                 var level = $('input[name=level]:checked').val();
@@ -354,6 +362,8 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
                 }
                 // console.log(type);
             }
+            search = type;
+            console.log(type);
             var mile = $('input[name=area]:checked').val();
             that.getMarkerPosition();
             opt = {
@@ -362,9 +372,13 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
                 lng:pos.lng,
                 lat:pos.lat
             };
-            that.actClose();
+
+            console.log(opt);
             map.nearBySearch(opt);
+            that.sendRecord(opt);
+            that.actClose();
             $('.collection').css('display','block');
+
         },
         actNavigate: function(e){
             var that = this;
@@ -387,6 +401,84 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             }else{
                 return false;
             }
+        },
+        sendRecord:function(opt){
+            var date = new Date();
+            record = {
+                user_id:conf.user_data._id,
+                date:date.getTime(),
+                locale_time:date.toLocaleString(),
+                position:{
+                    lng:opt.lng,
+                    lat:opt.lat
+                },
+                condition:{
+                    types:$('input[name=type]:checked').val(),
+                    detail:$('input[name=detail]:checked').val(),
+                    level:$('input[name=level]:checked').val(),
+                    area:$('input[name=area]:checked').val()
+                }
+            };
+            $.ajax({
+                url: '/record',
+                type: 'POST',
+                dataType: 'json',
+                data: record
+            })
+            .done(function(res) {
+                // console.log(res.ret);
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                // console.log("complete");
+            });
+        },
+        addCollection:function(){
+            var that = this;
+            var remark = prompt('请输入收藏的备注');
+            var user_record = {
+                user_id:conf.user_data._id,
+                info:{
+                    date:record.date,
+                    locale_time:record.locale_time,
+                    position:record.position,
+                    condition:record.condition,
+                    remark:remark,
+                    search:search
+                }
+            };
+            $.ajax({
+                url: '/userInfo/addRecord',
+                type: 'POST',
+                dataType: 'json',
+                data: user_record
+            })
+            .done(function(res) {
+                if(res.ret == 1){
+                    alert(res.msg);
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                // console.log("complete");
+            });
+        },
+        searchAgain:function(querys){
+            var that = this;
+            var opt = {
+                type:querys.search,
+                mile:querys.area,
+                lng:querys.lng,
+                lat:querys.lat
+            }
+            console.log(opt);
+            map.nearBySearch(opt);
+            that.sendRecord(opt);
+            $('.collection').css('display','block');
         }
     });
     return View;

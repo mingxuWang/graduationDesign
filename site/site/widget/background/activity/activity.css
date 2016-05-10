@@ -101,6 +101,7 @@
 }
 .back-push .main .container .main-content .publish-form textarea {
   resize: none;
+  height: 300px;
 }
 .back-push .main .container .main-content .publish-form .check-list {
   padding: 0 10px;

@@ -3,7 +3,7 @@ var application_root = __dirname,
     path = require('path'),
     mongoose = require('mongoose'),
     crypto = require('crypto');
-var AccountSchema, Account,AdminAccount,AdminAccountSchema,ArticalSchema,Artical,ActivitySchema,Activity;
+var AccountSchema, Account,AdminAccount,AdminAccountSchema,ArticalSchema,Artical,ActivitySchema,Activity,RecordSchema,Record;
 
 var app = express();
 
@@ -103,6 +103,39 @@ app.post('/account/register', function(req, res) {
     
 });
 
+/**
+ * 用户收藏接口
+ */
+
+app.post('/userInfo/addRecord',function(req,res){
+    Account.update({_id:req.body.user_id},{$push:{'collections':req.body.info}},function(err,doc){
+        if(doc == 1){
+            var resp = {
+                ret :1,
+                msg : '收藏成功，可到我的收藏中进行查看！'
+            }
+            res.send(resp);
+        }
+    })
+});
+
+app.post('/userInfo/record',function(req,res){
+    Account.findOne({_id:req.body.id},{collections:1},function(err,doc){
+        if(doc != null){
+            var resp = {
+                ret :1,
+                list:doc
+            }
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg : '暂时没有相关数据！'
+            }
+            res.send(resp);
+        }
+    })
+})
 
 /**
  * 修改密码接口
@@ -207,7 +240,7 @@ app.get('/artical',function(req,res){
         if(doc.toString() != ''){
             var resp = {
                 ret :1,
-                list : doc
+                list : doc.reverse()
             };
             res.send(resp);
         }else{
@@ -314,7 +347,7 @@ app.post('/publish/activity',function(req,res){
             publishAct(act);
             var resp = {
                 ret :1,
-                msg : '发布成功！'
+                msg : '发布成功！审核通过后就会显示啦~'
             }
             res.send(resp);
         }
@@ -326,7 +359,7 @@ app.get('/activity',function(req,res){
         if(doc.toString() != ''){
             var resp = {
                 ret :1,
-                list : doc
+                list : doc.reverse()
             };
             res.send(resp);
         }else{
@@ -344,7 +377,7 @@ app.get('/activity/show',function(req,res){
         if(doc.toString() != ''){
             var resp = {
                 ret :1,
-                list : doc
+                list : doc.reverse()
             };
             res.send(resp);
         }else{
@@ -430,6 +463,38 @@ app.post('/activity/delete',function(req,res){
     });
 });
 
+/**
+ * 用户查询信息记录接口
+ */
+
+app.post('/record', function(req, res) {
+    var record = req.body;
+    publishRec(record);
+    var resp = {
+        ret: 1
+    }
+    res.send(resp);
+})
+
+app.get('/record', function(req, res) {
+    Record.find({},function(err,docs){
+        if(docs.toString() != ''){
+            var resp = {
+                ret:1,
+                list:docs.reverse()
+            }
+            res.send(resp);
+        }else{
+            var resp = {
+                ret :0,
+                msg :'暂无数据'
+            };
+            res.send(resp);
+        }
+    })
+
+})
+
 
 
 /**
@@ -473,10 +538,26 @@ db.once('open', function() {
         site:{type:String},
         show:{type:Number}
     });
+    RecordSchema = new mongoose.Schema({
+        user_id:String,
+        date:Number,
+        locale_time:String,
+        position:{
+            lng:Number,
+            lat:Number
+        },
+        condition:{
+            types:String,
+            detail:String,
+            level:String,
+            area:String
+        }
+    });
     Activity = db.model('Activity', ActivitySchema);
     Account = db.model('Account', AccountSchema);
     AdminAccount = db.model('AdminAccount',AdminAccountSchema);
     Artical = db.model('Artical',ArticalSchema);
+    Record = db.model('Record',RecordSchema);
 });
 
 var register = function(userInfo) {
@@ -544,6 +625,24 @@ var publishActCallback = function(err) {
         return console.log(err);
     }
     return console.log('Activity was created');
+};
+
+
+var publishRec = function(record){
+    var rec = new Record({
+        user_id:record.id,
+        position:record.position,
+        date:record.date,
+        locale_time:record.locale_time,
+        condition:record.condition
+    });
+    rec.save(publishRecCallback);
+};
+var publishRecCallback = function(err) {
+    if (err) {
+        return console.log(err);
+    }
+    return console.log('Record was created');
 };
 
 

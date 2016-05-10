@@ -23,7 +23,8 @@ define(['backbone', 'template', 'my/tpls', 'ui/helper/helper'], function(Backbon
             'click .list-item': 'actInfo',
             'click .sign-out': 'actSignOut',
             'click .tips': 'pageTips',
-            'click .change-pwd': 'pageChangePwd'
+            'click .change-pwd': 'pageChangePwd',
+            'click .collection': 'pageCollection'
         },
         initialize: function() {
             this.model = new Model();
@@ -57,6 +58,9 @@ define(['backbone', 'template', 'my/tpls', 'ui/helper/helper'], function(Backbon
         },
         pageChangePwd: function(){
             Backbone.history.navigate('my/changePassword', { trigger: true, replace: false });
+        },
+        pageCollection:function(){
+            Backbone.history.navigate('my/collection',{trigger:true,replace:false});
         }
     });
     return View;

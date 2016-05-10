@@ -22,7 +22,7 @@ define(['backbone', 'template', 'index/info/tpls'], function(Backbone, T, tpls) 
         initialize: function(querys){
             var that = this;
             that.set('id',querys.id);
-            console.log(querys.id);
+            // console.log(querys.id);
         },
         getInfo: function() {
             var that = this;
@@ -46,7 +46,7 @@ define(['backbone', 'template', 'index/info/tpls'], function(Backbone, T, tpls) 
                 console.log("error");
             })
             .always(function() {
-                console.log("complete");
+                // console.log("complete");
             });
             
 

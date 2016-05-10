@@ -1,0 +1,93 @@
+.add .main {
+  position: relative;
+}
+.add .main .header .act-back {
+  position: fixed;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-left: 0.4rem;
+  color: white;
+}
+.add .main .header .btn-publish {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.4rem;
+  width: 2rem;
+  height: 0.9rem;
+  border-radius: 0.15rem;
+  font-size: 0.6rem;
+  line-height: 0.9rem;
+  background-color: white;
+  color: #01bc8f;
+  text-align: center;
+  cursor: pointer;
+}
+.add .main .publish-form {
+  margin: 0 auto;
+  width: 10rem;
+  height: 14rem;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+  padding-top: 1rem;
+  background-color: white;
+}
+.add .main .publish-form .form-type {
+  height: 2rem;
+}
+.add .main .publish-form .form-group {
+  position: relative;
+  margin-left: 0.5rem;
+  font-size: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+.add .main .publish-form .form-group .label {
+  display: inline-block;
+  height: 1rem;
+  width: 2.5rem;
+  vertical-align: middle;
+}
+.add .main .publish-form .form-group input[type=text] {
+  display: inline-block;
+  background-color: #01bc8f;
+  color: white;
+  height: 1rem;
+  width: 6.5rem;
+  border-radius: 0.1rem;
+  vertical-align: middle;
+  font-size: 0.6rem;
+  text-align: center;
+}
+.add .main .publish-form .form-group input:disabled {
+  display: inline-block;
+  background-color: #F05352;
+  color: black;
+  height: 1rem;
+  width: 6.5rem;
+  border-radius: 0.1rem;
+  vertical-align: middle;
+  font-size: 0.6rem;
+  text-align: center;
+}
+.add .main .publish-form .form-group .item-container {
+  position: absolute;
+  left: 2.5rem;
+  top: 0rem;
+}
+.add .main .publish-form .form-group .item-container .check-list {
+  font-size: 0.65rem;
+  height: 1rem;
+  line-height: 1rem;
+  float: left;
+}
+.add .main .publish-form .form-group .item-container .check-list label {
+  margin-right: 0.2rem;
+  margin-left: 0.1rem;
+}
+.add .main .publish-form .form-group #summary {
+  position: absolute;
+  width: 6.5rem;
+  resize: none;
+  height: 4.5rem;
+  font-size: 0.65rem;
+}

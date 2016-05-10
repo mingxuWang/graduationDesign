@@ -15,7 +15,6 @@ define(['backbone', 'template', 'account/login/tpls','ui/helper/helper'], functi
             var that = this;
             var querys = options.querys;
             that.redirectUrl = querys.redirectUrl;
-            that.router = that.getRouter(that.redirectUrl);
             that.render();
         },
         render: function() {
@@ -67,7 +66,8 @@ define(['backbone', 'template', 'account/login/tpls','ui/helper/helper'], functi
                         conf.user_data = response.userInfo;
                         helper.setItem('is_login',true);
                         helper.setItem('user_data',response.userInfo);
-                        Backbone.history.navigate('my', { trigger: true, replace: false });
+                        that.$el.remove();
+                        location.hash="#my";
                     } else {
                         alert(response.msg);
                     }
@@ -76,10 +76,6 @@ define(['backbone', 'template', 'account/login/tpls','ui/helper/helper'], functi
                     alert("登录失败!");
                 }
             });
-        },
-        getRouter: function(string) {
-            var begin = string.indexOf('#');
-            return string.slice(begin);
         }
 
     });

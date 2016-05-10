@@ -41,6 +41,7 @@
   margin: 0.2rem;
   background-color: #01bc8f;
   border-radius: 0.3rem;
+  z-index: 9999;
 }
 .register .main .header .act-back {
   position: fixed;
