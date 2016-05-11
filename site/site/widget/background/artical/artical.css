@@ -79,6 +79,21 @@
   width: 90px;
   margin: 20px;
 }
+.back-artical .main .container .content .all {
+  margin-left: 15px;
+}
+.back-artical .main .container .content .page {
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+}
+.back-artical .main .container .content .go {
+  padding-right: 15px;
+}
+.back-artical .main .container .content td {
+  text-align: center;
+  vertical-align: center;
+}
 .back-artical .main .container .main-content .breadcrumb .active {
   font-weight: bold;
 }

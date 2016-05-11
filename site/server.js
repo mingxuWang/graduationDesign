@@ -190,21 +190,47 @@ app.post('/account/changePassword',function(req,res){
  * @param  {Array}  function(err,doc){                                                   if(doc ! [description]
  * @return {[type]}                     [description]
  */
-app.get('/userInfo',function(req,res){
-    Account.find({},{password:0},function(err,doc){
-        if(doc != []){
-            var resp = {
-                ret :1,
-                info : doc
+app.post('/userInfo',function(req,res){
+    if(req.body.limit != null){
+        var skips = req.body.skip;
+        var limits = req.body.limit;
+        Account.count({},function(err,count){
+            Account.find({},{password:0},{skip:skips*10,limit:limits},function(err,docs){
+                if(docs.toString() != ''){
+                    var resp = {
+                        ret:1,
+                        page:Math.floor(count/10)+1,
+                        count:count,
+                        info:docs.reverse()
+                    }
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :0,
+                        msg :'暂无数据'
+                    };
+                    res.send(resp);
+                }
+            })
+        });
+        
+    }else{
+        Account.find({},{password:0},function(err,docs){
+            if(docs.toString() != ''){
+                var resp = {
+                    ret:1,
+                    info:docs.reverse()
+                }
+                res.send(resp);
+            }else{
+                var resp = {
+                    ret :0,
+                    msg :'暂无数据'
+                };
+                res.send(resp);
             }
-            res.send(resp);
-        }else{
-            var resp = {
-                ret :0,
-                msg :'暂无数据！'
-            }
-        }
-    });
+        })
+    }
 });
 
 /**
@@ -251,6 +277,49 @@ app.get('/artical',function(req,res){
             res.send(resp);
         }
     });
+});
+
+app.post('/artical',function(req,res){
+    if(req.body.limit != null){
+        var skips = req.body.skip;
+        var limits = req.body.limit;
+        Artical.count({},function(err,count){
+            Artical.find({},null,{skip:skips*10,limit:limits},function(err,docs){
+                if(docs.toString() != ''){
+                    var resp = {
+                        ret:1,
+                        page:Math.floor(count/10)+1,
+                        count:count,
+                        list:docs.reverse()
+                    }
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :0,
+                        msg :'暂无数据'
+                    };
+                    res.send(resp);
+                }
+            })
+        });
+        
+    }else{
+        Artical.find({},null,function(err,docs){
+            if(docs.toString() != ''){
+                var resp = {
+                    ret:1,
+                    list:docs.reverse()
+                }
+                res.send(resp);
+            }else{
+                var resp = {
+                    ret :0,
+                    msg :'暂无数据'
+                };
+                res.send(resp);
+            }
+        })
+    }
 });
 
 app.post('/artInfo',function(req,res){
@@ -371,6 +440,48 @@ app.get('/activity',function(req,res){
         }
     });
 });
+app.post('/activity',function(req,res){
+    if(req.body.limit != null){
+        var skips = req.body.skip;
+        var limits = req.body.limit;
+        Activity.count({},function(err,count){
+            Activity.find({},null,{skip:skips*10,limit:limits},function(err,docs){
+                if(docs.toString() != ''){
+                    var resp = {
+                        ret:1,
+                        page:Math.floor(count/10)+1,
+                        count:count,
+                        list:docs.reverse()
+                    }
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :0,
+                        msg :'暂无数据'
+                    };
+                    res.send(resp);
+                }
+            })
+        });
+        
+    }else{
+        Activity.find({},null,function(err,docs){
+            if(docs.toString() != ''){
+                var resp = {
+                    ret:1,
+                    list:docs.reverse()
+                }
+                res.send(resp);
+            }else{
+                var resp = {
+                    ret :0,
+                    msg :'暂无数据'
+                };
+                res.send(resp);
+            }
+        })
+    }
+});
 
 app.get('/activity/show',function(req,res){
     Activity.find({show:1},function(err,doc){
@@ -480,12 +591,13 @@ app.post('/record/search', function(req, res) {
     if(req.body.limit != null){
         var skips = req.body.skip;
         var limits = req.body.limit;
-        Record.count({},function(err,count){
-            Record.find({},null,{skip:skips*10,limit:limits},function(err,docs){
+        Record.count({"condition.types":{"$nin":['药房']}},function(err,count){
+            Record.find({"condition.types":{"$nin":['药房']}},null,{skip:skips*10,limit:limits},function(err,docs){
                 if(docs.toString() != ''){
                     var resp = {
                         ret:1,
                         page:Math.floor(count/10)+1,
+                        count:count,
                         record:docs.reverse()
                     }
                     res.send(resp);
@@ -499,6 +611,23 @@ app.post('/record/search', function(req, res) {
             })
         });
         
+    }else if(req.body.time_limit != null){
+        var time_limit = req.body.time_limit;
+        Record.find({"date":{"$gte":time_limit}},null,function(err,docs){
+            if(docs.toString() != ''){
+                var resp = {
+                    ret:1,
+                    record:docs.reverse()
+                }
+                res.send(resp);
+            }else{
+                var resp = {
+                    ret :0,
+                    msg :'暂无数据'
+                };
+                res.send(resp);
+            }
+        })
     }else{
         Record.find({},null,function(err,docs){
             if(docs.toString() != ''){
@@ -516,11 +645,52 @@ app.post('/record/search', function(req, res) {
             }
         })
     }
-    
+});
 
-})
+/**
+ * 后台修改用户密码及删除用户
+ */
 
+ app.post('/back/changePassword',function(req,res){
+     var password = req.body.password;
+     var id = req.body.id;
+     Account.findOne({_id:id},{_id:1},function(err,doc){
+         if(doc != null){
+             Account.update({_id:id},{$set:{password:password}},{upsert:false},function(err){
+                 if(err){
+                     var resp = {
+                         ret :0,
+                         msg:err
+                     }
+                     res.send(resp);
+                 }else{
+                     var resp = {
+                         ret :1,
+                         msg:'修改成功!'
+                     }
+                     res.send(resp);
+                 }
+             });
+         }else{
+             var resp = {
+                 ret :0,
+                 msg:'Something wrong!'
+             }
+             res.send(resp);
+         }
+     });
+ });
 
+ app.post('/back/deleteAccount',function(req,res){
+    var id = req.body.id;
+    Account.remove({_id:id},function(err,doc){
+        var resp = {
+            ret :1,
+            msg:'成功删除该用户!'
+        }
+        res.send(resp);
+    })
+ })
 
 /**
  * 数据库连接等相关

@@ -55,16 +55,24 @@ define(['backbone', 'template', 'background/activity/tpls','ui/helper/helper'], 
         defaults:{
             list:null
         },
-        getList: function(){
+        getList: function(options){
             var that = this;
+            var defaults = {
+                limit:10,
+                skip:0
+            };
+            var opt = options?options:defaults;
             $.ajax({
                 url: '/activity',
-                type: 'GET',
-                dataType: 'JSON'
+                type: 'POST',
+                dataType: 'JSON',
+                data:opt
             })
             .done(function(res) {
                 if(res.ret ===1){
-                    that.set('list',res.list);
+                    that.set({list:res.list,count:res.count,page:res.page});
+                }else{
+                    alert('超出页码范围!');
                 }
             })
             .fail(function() {
@@ -87,7 +95,9 @@ define(['backbone', 'template', 'background/activity/tpls','ui/helper/helper'], 
         'click .check-btn':'actShowDetail',
         'click .btn-back': 'actBack',
         'click .btn-update': 'actUpdate',
-        'click .btn-delete': 'actDelete'
+        'click .btn-delete': 'actDelete',
+        'click .all':'actShowAll',
+        'click .go':'actGoPage'
     },
     initialize: function() {
         this.model = new Model();
@@ -118,7 +128,10 @@ define(['backbone', 'template', 'background/activity/tpls','ui/helper/helper'], 
     },
     renderList: function() {
         var that = this;
-        this.$el.find('.main .container .content').html(T.compile(tpls.list)({list:that.model.get('list')}));
+        var list = that.model.get('list');
+        var page = that.model.get('page');
+        var count = that.model.get('count');
+        this.$el.find('.main .container .content').html(T.compile(tpls.list)({list:list,page:page,count:count}));
     },
     renderPublish:function(){
         var date = new Date();
@@ -259,6 +272,22 @@ define(['backbone', 'template', 'background/activity/tpls','ui/helper/helper'], 
         }
         console.log(act);
         return act;
+    },
+    actShowAll:function(e){
+        var that = this;
+        var opt = {
+            limit:null
+        };
+        that.model.getList(opt);
+    },
+    actGoPage:function(){
+        var that = this;
+        var skip = $('#page').val()-1;
+        var opt = {
+            limit:10,
+            skip:skip
+        };
+        that.model.getList(opt);
     }
 });
 return index_view;

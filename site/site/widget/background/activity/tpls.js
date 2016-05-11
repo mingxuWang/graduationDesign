@@ -31,6 +31,16 @@ define(function() {
             '{{/each}}'
         ].join(''),
         list: [
+            '<div class="row">',
+                '<div class="btn col-sm-2 btn-default all">显示全部数据</div>',
+                '<label class="control-label col-sm-offset-3  col-sm-4 page">共{{page}}页,{{count}}条数据</label>',
+                '<div class="input-group col-sm-2 col-sm-offset-10 ">',
+                '<input type="text" class="form-control" id="page" placeholder="页码">',
+                      '<span class="input-group-btn go">',
+                        '<button class="btn btn-default" type="button">Go!</button>',
+                      '</span>',
+                '</div>',
+            '</div>',
             '<table class="info-table table table-bordered table-hover col-md-12">',
                 '<thead>',
                     '<td>序号</td><td>题目</td><td>发布日期</td><td>活动日期</td><td>发布人</td><td>是否通过审核</td><td>查看详情</td>',

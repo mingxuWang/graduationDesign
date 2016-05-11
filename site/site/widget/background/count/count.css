@@ -35,16 +35,63 @@
   font-size: 16px;
   text-align: center;
 }
+.back-count .main .container .content .info-table td {
+  vertical-align: middle;
+}
+.back-count .main .container .content .info-table .btn-modify {
+  background-color: #01bc8f;
+  color: white;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.back-count .main .container .content .info-table .btn-delete {
+  background-color: #01bc8f;
+  color: white;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.back-count .main .container .content #map {
+  height: 300px;
+  margin-bottom: 15px;
+  padding: 0 30px;
+}
+.back-count .main .container .content #map .amap-marker-content {
+  color: white;
+  width: 19px;
+  height: 33px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  background-image: url('http://webapi.amap.com/theme/v1.3/markers/b/mark_bs.png');
+  background-size: 19px 33px;
+}
 .back-count .main .container .content .all {
   margin-left: 15px;
+}
+.back-count .main .container .content .show {
+  margin-left: 10px;
 }
 .back-count .main .container .content .page {
   height: 34px;
   line-height: 34px;
   text-align: center;
 }
+.back-count .main .container .content .page .data-btn {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 0 5px;
+  color: white;
+  background-color: #01bc8f;
+  border-radius: 5px;
+}
 .back-count .main .container .content .go {
   padding-right: 15px;
+}
+.back-count .main .container .content .btn-checkAll {
+  vertical-align: center;
+  background-color: #01bc8f;
+  color: white;
+  cursor: pointer;
 }
 .back-count .main .container .content td {
   text-align: center;

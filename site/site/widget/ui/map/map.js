@@ -50,6 +50,32 @@ define(['jquery'], function($) {
             conf.begin.lat = opt.lat;
 
         },
+        initBack:function(arr){
+            var defaults = {
+                lng: '114.492231',
+                lat: '36.60124'
+            };
+            opt = defaults;
+            mapshow = new AMap.Map('map', {
+                zoom: 12
+            });
+            if(arr){
+                var len = arr.length;
+                for(var i = 0;i<len;i++){
+                    var markers = new AMap.Marker({
+                        position: [arr[i].lng, arr[i].lat],
+                        map: mapshow,
+                        draggable: false,
+                        cursor: 'move',
+                        raiseOnDrag: false,
+                        title:arr[i].title,
+                        content:(i+1).toString(),
+                        topWhenMouseOver:true
+                    });
+                }
+            }
+
+        },
         getMarkerPosition: function() {
             var position = {
                 lng: marker.Pe.position.lng,

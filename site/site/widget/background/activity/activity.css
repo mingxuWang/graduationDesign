@@ -85,6 +85,21 @@
   cursor: pointer;
   width: 90px;
 }
+.back-push .main .container .content .all {
+  margin-left: 15px;
+}
+.back-push .main .container .content .page {
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+}
+.back-push .main .container .content .go {
+  padding-right: 15px;
+}
+.back-push .main .container .content td {
+  text-align: center;
+  vertical-align: center;
+}
 .back-push .main .container .main-content .breadcrumb .active {
   font-weight: bold;
 }

@@ -477,7 +477,6 @@ define(['backbone', 'template', 'search/tpls', 'ui/map/map', 'ui/geolocation/geo
             }
             console.log(opt);
             map.nearBySearch(opt);
-            that.sendRecord(opt);
             $('.collection').css('display','block');
         }
     });
