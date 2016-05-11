@@ -79,6 +79,7 @@ define(['backbone', 'template', 'activity/add/tpls'], function(Backbone, T, tpls
         
     },
     getActivity: function() {
+        var date = new Date();
         var act = {
             title: $('#title').val(),
             author: $('#author').val(),
@@ -86,7 +87,8 @@ define(['backbone', 'template', 'activity/add/tpls'], function(Backbone, T, tpls
             type: $('input[name=activity]:checked').val(),
             summary: $('#summary').val(),
             site: $('#site').val(),
-            show: 0
+            show: 0,
+            locale_time: date.toLocaleString()
         }
         return act;
     }

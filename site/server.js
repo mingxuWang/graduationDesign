@@ -476,22 +476,47 @@ app.post('/record', function(req, res) {
     res.send(resp);
 })
 
-app.get('/record', function(req, res) {
-    Record.find({},function(err,docs){
-        if(docs.toString() != ''){
-            var resp = {
-                ret:1,
-                list:docs.reverse()
+app.post('/record/search', function(req, res) {
+    if(req.body.limit != null){
+        var skips = req.body.skip;
+        var limits = req.body.limit;
+        Record.count({},function(err,count){
+            Record.find({},null,{skip:skips*10,limit:limits},function(err,docs){
+                if(docs.toString() != ''){
+                    var resp = {
+                        ret:1,
+                        page:Math.floor(count/10)+1,
+                        record:docs.reverse()
+                    }
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :0,
+                        msg :'暂无数据'
+                    };
+                    res.send(resp);
+                }
+            })
+        });
+        
+    }else{
+        Record.find({},null,function(err,docs){
+            if(docs.toString() != ''){
+                var resp = {
+                    ret:1,
+                    record:docs.reverse()
+                }
+                res.send(resp);
+            }else{
+                var resp = {
+                    ret :0,
+                    msg :'暂无数据'
+                };
+                res.send(resp);
             }
-            res.send(resp);
-        }else{
-            var resp = {
-                ret :0,
-                msg :'暂无数据'
-            };
-            res.send(resp);
-        }
-    })
+        })
+    }
+    
 
 })
 
@@ -532,6 +557,7 @@ db.once('open', function() {
     ActivitySchema = new mongoose.Schema({
         title: { type: String},
         date: { type: String },
+        locale_time:String,
         author:{ type: String },
         summary: { type: String },
         type:{type:String},
@@ -612,6 +638,7 @@ var publishAct = function(activity){
     var act = new Activity({
         title: activity.title,
         date: activity.date,
+        locale_time:activity.locale_time,
         author:activity.author,
         summary: activity.summary,
         type:activity.type,

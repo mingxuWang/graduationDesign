@@ -35,3 +35,18 @@
   font-size: 16px;
   text-align: center;
 }
+.back-count .main .container .content .all {
+  margin-left: 15px;
+}
+.back-count .main .container .content .page {
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+}
+.back-count .main .container .content .go {
+  padding-right: 15px;
+}
+.back-count .main .container .content td {
+  text-align: center;
+  vertical-align: center;
+}

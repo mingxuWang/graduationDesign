@@ -121,6 +121,7 @@ define(['backbone', 'template', 'background/artical/tpls','ui/helper/helper'], f
         var type = $(e.currentTarget).data('crumb');
         this.$el.find('.crumb').removeClass('active').filter('.crumb-'+type).addClass('active');
         if(type === 'list'){
+            that.model.getList();
             that.renderList();
         }else{
             that.renderPublish();

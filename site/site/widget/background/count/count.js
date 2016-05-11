@@ -23,6 +23,9 @@ define(['backbone', 'template', 'background/count/tpls','ui/helper/helper'], fun
         {
             role: 'info',
             name:'用户信息'
+        },{
+            role:'record',
+            name:'查询统计'
         }
     ];
 
@@ -39,7 +42,7 @@ define(['backbone', 'template', 'background/count/tpls','ui/helper/helper'], fun
             })
             .done(function(res) {
                 if(res.ret ===1){
-                    that.set({info : res.info})
+                    that.set({info : res.info});
                 }else{
                     alert('Someting wrong!');
                 }
@@ -48,23 +51,55 @@ define(['backbone', 'template', 'background/count/tpls','ui/helper/helper'], fun
                 console.log("error");
             })
             .always(function() {
-                console.log("complete");
+                // console.log("complete");
             });
             
+        },
+        getRecord : function(options){
+            var defaults = {
+                limit:10,
+                skip:0
+            };
+            var opt = (options?options:defaults);
+            var that = this;
+            $.ajax({
+                url: '/record/search',
+                type: 'POST',
+                dataType: 'JSON',
+                data:opt
+            })
+            .done(function(res) {
+                if(res.ret ===1){
+                    that.set({page:res.page});
+                    that.set({record : res.record});
+                }else{
+                    alert('超出页码范围!');
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
         }
-    })
+    });
     
     var index_view = Backbone.View.extend({
     tagName: 'div',
     model: null,
     className: 'back-count',
     events: {
-        'click .sign-out': 'actSignout'
+        'click .sign-out': 'actSignout',
+        'click .crumb':'actCrumb',
+        'click .all':'actShowAll',
+        'click .go':'actGoPage'
     },
     initialize: function() {
         this.model = new Model();
         this.render();
-        this.listenTo(this.model,'change:info',this.renderTable);
+        this.listenTo(this.model,'change:info',this.renderInfo);
+        this.listenTo(this.model,'change:record',this.renderRecord);
         this.model.getList();
     },
     render: function() {
@@ -89,10 +124,17 @@ define(['backbone', 'template', 'background/count/tpls','ui/helper/helper'], fun
         this.$el.find('.crumb').removeClass('active').filter('.crumb-info').addClass('active');
 
     },
-    renderTable: function() {
+    renderInfo: function() {
         var that = this;
         var list = that.model.get('info');
-        this.$el.find('.main .container .content').html(T.compile(tpls.table)({list:list}));
+        this.$el.find('.main .container .content').html(T.compile(tpls.info)({list:list}));
+    },
+    renderRecord:function(){
+        var that = this;
+        var record = that.model.get('record');
+        var page = that.model.get('page');
+        console.log(page);
+        this.$el.find('.main .container .content').html(T.compile(tpls.record)({record:record,page:page}));
     },
     actSignout: function() {
         conf.admin_is_login = false;
@@ -100,6 +142,34 @@ define(['backbone', 'template', 'background/count/tpls','ui/helper/helper'], fun
         helper.setItem('admin_is_login',false);
         helper.setItem('admin_data',null);
         Backbone.history.navigate('login',{trigger:true,replace:false});
+    },
+    actCrumb:function(e){
+        var that = this;
+        var type = $(e.currentTarget).data('crumb');
+        this.$el.find('.crumb').removeClass('active').filter('.crumb-'+type).addClass('active');
+        if(type === 'info'){
+            that.model.getList();
+            that.renderInfo();
+        }else{
+            that.model.getRecord();
+            that.renderRecord();
+        }
+    },
+    actShowAll:function(){
+        var that = this;
+        var opt = {
+            limit:null
+        };
+        that.model.getRecord(opt);
+    },
+    actGoPage:function(){
+        var that = this;
+        var skip = $('#page').val()-1;
+        var opt = {
+            limit:10,
+            skip:skip
+        };
+        that.model.getRecord(opt);
     }
 });
 return index_view;

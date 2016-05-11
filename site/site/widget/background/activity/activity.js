@@ -246,10 +246,12 @@ define(['backbone', 'template', 'background/activity/tpls','ui/helper/helper'], 
         if($('input[name=show]:checked').length != 0){
             show = 1;
         }
+        var date = new Date();
         var act = {
             title: $('#title').val(),
             author: $('#author').val(),
             date: $('#date').val(),
+            locale_time:date.toLocaleString(),
             type:$('input[name=activity]:checked').val(),
             summary:$('#summary').val(),
             site:$('#site').val(),
