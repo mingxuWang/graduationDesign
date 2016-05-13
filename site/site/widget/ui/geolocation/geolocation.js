@@ -1,5 +1,6 @@
 define(['ui/map/map'],function(map) {
     var geo = {
+        //检查浏览器是否支持Geolocation功能
         checkGeo: function() {
             if (navigator.geolocation) {
                 return true
@@ -8,6 +9,7 @@ define(['ui/map/map'],function(map) {
                 return false
             }
         },
+        // 获取地理位置信息
         getPosition: function(){
         	var that = this;
         	navigator.geolocation.getCurrentPosition(that.successFun,that.errorFun);

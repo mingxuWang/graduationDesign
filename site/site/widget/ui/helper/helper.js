@@ -98,6 +98,11 @@ define(function(){
 			var ua = navigator.userAgent.toLowerCase();
 			return (/Android|Linux/i).test(ua);
 		},
+
+		/**
+		 * LocalStorage存储方法封装
+		 */
+
 		canUse: function() {
 		    return typeof window.localStorage != 'undefined';
 		},
