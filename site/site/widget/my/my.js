@@ -1,19 +1,5 @@
 define(['backbone', 'template', 'my/tpls', 'ui/helper/helper'], function(Backbone, T, tpls, helper) {
     var $canvas = $(document.body).find('#canvas');
-    var Model = Backbone.Model.extend({
-        //url:'',
-        defaults: function() {
-            return {
-                header: null,
-                banner: null,
-                list: null
-            }
-        },
-        getList: function() {
-            var that = this;
-
-        }
-    });
     var View = Backbone.View.extend({
         tagName: 'div',
         model: null,
@@ -27,7 +13,6 @@ define(['backbone', 'template', 'my/tpls', 'ui/helper/helper'], function(Backbon
             'click .collection': 'pageCollection'
         },
         initialize: function() {
-            this.model = new Model();
             this.renderSkeleton();
             this.renderHeader();
             this.renderTop();

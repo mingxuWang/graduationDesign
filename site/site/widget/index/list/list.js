@@ -1,7 +1,9 @@
 define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) {
-    var $canvas = $(document.body).find('#canvas');
 
-    
+    var $canvas = $(document.body).find('#canvas');//视图切换的容器
+    /**
+     * list中的Model定义
+     */
     var Model = Backbone.Model.extend({
         defaults: function() {
             return {
@@ -26,18 +28,22 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
                 console.log("error");
             })
             .always(function() {
-                // console.log("complete");
             });
             
 
         }
     });
-    var index_view = Backbone.View.extend({
+    /**
+     * list中的View定义
+     */
+    var View = Backbone.View.extend({
         tagName: 'div',
         model: null,
         className: 'index-list',
         events: {
-            'click .list-item': 'actInfo'
+            'click .list-item': 'actInfo',
+            'click .banner':'actShow',
+            'click #pageIn':'actShow'
         },
         initialize: function() {
             this.model = new Model();
@@ -66,8 +72,11 @@ define(['backbone', 'template', 'index/list/tpls'], function(Backbone, T, tpls) 
             var id = $(e.currentTarget).data("id");
             Backbone.history.navigate('index/info?id='+id,{trigger: true, replace: false});
 
+        },
+        actShow:function(){
+            $('#pageIn').toggle();
         }
     });
-    return index_view;
+    return View;
 
 });

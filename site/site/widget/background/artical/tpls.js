@@ -129,7 +129,7 @@ define(function() {
                 '<div class="form-group">',
                     '<label for="img-src" class="col-sm-2 control-label">图片地址链接</label>',
                     '<div class="col-sm-10">',
-                        '<input type="text" class="form-control" value={{item.img_src}} id="img-src" placeholder="图片需提前上传至七牛存储或选取在线图片">',
+                        '<input type="text" class="form-control" value={{item.img_src}}  id="img-src" placeholder="图片需提前上传至七牛存储或选取在线图片">',
                     '</div>',
                 '</div>',
                 '<div class="form-group">',

@@ -5,6 +5,7 @@ define(function(){
                 '<header class="header">',
                 '</header>',
                 '<div class="banner">',
+                    '<div>老有所医用户指南</div>',
                 '</div>',
                 '<ul class="list">',
                 '</ul>',
@@ -27,7 +28,9 @@ define(function(){
                 '<div class="list-summary">{{item.summary}}</div>',
             '</li>',
             '{{/each}}',
-            '<div class="empty"></div>'
+            '<div class="empty"></div>',
+            '<img id="pageIn" src="../../../static/imgs/pagein.jpg" alt="" />',
+
         ].join('')
     };
     return tpls;

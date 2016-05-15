@@ -222,11 +222,11 @@ define(['backbone', 'template', 'background/count/tpls','ui/helper/helper','ui/m
             skip:0
         }
         if(type == 1){
-            opt.time_limit = (date.getTime()-86400);
+            opt.time_limit = (date.getTime()-86400000);
         }else if(type == 7){
-            opt.time_limit = (date.getTime()-604800);
+            opt.time_limit = (date.getTime()-604800000);
         }else{
-            opt.time_limit = (date.getTime()-2592000);
+            opt.time_limit = (date.getTime()-2592000000);
         }
         that.model.getRecord(opt);
     },

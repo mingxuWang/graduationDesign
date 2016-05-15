@@ -1,17 +1,5 @@
 define(['backbone', 'template', 'index/info/tpls'], function(Backbone, T, tpls) {
     var $canvas = $(document.body).find('#canvas');
-
-    var item = {
-    	title: "我是测试题目",
-    	author: "我是测试作者",
-    	date: "5月7日",
-    	para: [
-    		'我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段我是第一段',
-    		'我是第二段',
-    		'我是第三段',
-    		'我是第四段'
-    	]
-    }
     var Model = Backbone.Model.extend({
         defaults: function() {
             return {
@@ -22,7 +10,6 @@ define(['backbone', 'template', 'index/info/tpls'], function(Backbone, T, tpls) 
         initialize: function(querys){
             var that = this;
             that.set('id',querys.id);
-            // console.log(querys.id);
         },
         getInfo: function() {
             var that = this;
@@ -46,7 +33,6 @@ define(['backbone', 'template', 'index/info/tpls'], function(Backbone, T, tpls) 
                 console.log("error");
             })
             .always(function() {
-                // console.log("complete");
             });
             
 

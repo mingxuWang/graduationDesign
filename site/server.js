@@ -588,7 +588,29 @@ app.post('/record', function(req, res) {
 })
 
 app.post('/record/search', function(req, res) {
-    if(req.body.limit != null){
+    if(req.body.time_limit != null){
+        var time_limit = req.body.time_limit;
+        Record.count({"condition.types":{"$nin":['药房']},"date":{$gte:time_limit}},function(err,count){
+            Record.find({"date":{$gte:time_limit},"condition.types":{"$nin":['药房']}},null,function(err,docs){
+                if(docs.toString() != ''){
+                    var resp = {
+                        ret:1,
+                        record:docs.reverse(),
+                        count:count,
+                        page:1
+                    }
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :0,
+                        msg :'暂无数据'
+                    };
+                    res.send(resp);
+                }
+            })
+        });
+        
+    }else if(req.body.limit != ''){
         var skips = req.body.skip;
         var limits = req.body.limit;
         Record.count({"condition.types":{"$nin":['药房']}},function(err,count){
@@ -610,40 +632,26 @@ app.post('/record/search', function(req, res) {
                 }
             })
         });
-        
-    }else if(req.body.time_limit != null){
-        var time_limit = req.body.time_limit;
-        Record.find({"date":{"$gte":time_limit}},null,function(err,docs){
-            if(docs.toString() != ''){
-                var resp = {
-                    ret:1,
-                    record:docs.reverse()
-                }
-                res.send(resp);
-            }else{
-                var resp = {
-                    ret :0,
-                    msg :'暂无数据'
-                };
-                res.send(resp);
-            }
-        })
     }else{
-        Record.find({},null,function(err,docs){
-            if(docs.toString() != ''){
-                var resp = {
-                    ret:1,
-                    record:docs.reverse()
+        Record.count({"condition.types":{"$nin":['药房']}},function(err,count){
+            Record.find({"condition.types":{"$nin":['药房']}},null,function(err,docs){
+                if(docs.toString() != ''){
+                    var resp = {
+                        ret:1,
+                        record:docs.reverse(),
+                        count:count,
+                        page:1
+                    }
+                    res.send(resp);
+                }else{
+                    var resp = {
+                        ret :0,
+                        msg :'暂无数据'
+                    };
+                    res.send(resp);
                 }
-                res.send(resp);
-            }else{
-                var resp = {
-                    ret :0,
-                    msg :'暂无数据'
-                };
-                res.send(resp);
-            }
-        })
+            })
+        });
     }
 });
 
@@ -690,7 +698,7 @@ app.post('/record/search', function(req, res) {
         }
         res.send(resp);
     })
- })
+ });
 
 /**
  * 数据库连接等相关
@@ -708,8 +716,7 @@ db.once('open', function() {
         phone: { type: Number },
         hobbies: { type: [] },
         disease: { type: [] },
-        collections:{type:[]},
-        tips:{type:[]}
+        collections:{type:[]}
     });
     AdminAccountSchema = new mongoose.Schema({
         username: { type: String, unique: true },
